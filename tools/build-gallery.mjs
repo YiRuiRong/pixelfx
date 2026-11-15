@@ -26,7 +26,8 @@ const css = readFileSync(join(G, "style.css"), "utf8").replace("url(fonts/PatchP
 writeFileSync(
   join(PAGE, "index.html"),
   [
-    "<title>pixelfx</title>",
+    '<meta charset="utf-8">',
+    html.match(/<title>.*?<\/title>/)?.[0] ?? "<title>pixelfx</title>",
     '<meta name="claude:viewport-fit-sides" content="cover">',
     '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@400;500&family=Red+Hat+Mono:wght@400;500&display=swap">',
     `<style>\n${css}\n</style>`,

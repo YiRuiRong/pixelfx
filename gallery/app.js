@@ -3,11 +3,14 @@
 
 import { effects, categories } from "../src/fx/index.js";
 import { createFrame, clearFrame, createFx, createAct, actBounds, composite, backdrop, drawActor, painterFor, stockActor, actorAlphaOf, PAL, BACKDROPS } from "../src/core/index.js";
+import { t, getLanguage, setLanguage, effectText, categoryText, tagText, paletteText, backdropText, searchText } from "./i18n.js";
 
 const REPO = "https://github.com/patch-gg/pixelfx";
 const FX = Object.entries(effects).map(([id, mod]) => {
   const meta = { fps: 30, bg: "dark", loop: false, duration: 1, tags: [], options: {}, ...mod.meta };
-  return { id, cat: id.split("/")[0], name: meta.name, mod: { ...mod, meta }, meta };
+  const fx = { id, cat: id.split("/")[0], name: meta.name, mod: { ...mod, meta }, meta };
+  fx.search = searchText(fx, categories.find((c) => c.id === fx.cat));
+  return fx;
 });
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 // full-screen effects (transitions, weather, impact frames) fill a 16:9 stage edge to edge instead of floating in it
@@ -108,28 +111,29 @@ class Player {
 const tiles = [];
 const sections = [];
 function build() {
-  $("#count").textContent = FX.length;
+  $("#subtitle").textContent = t("subtitle", { count: FX.length });
   const main = $("#grid");
   for (const c of categories) {
     const list = FX.filter((f) => f.cat === c.id);
     if (!list.length) continue;
     const grid = el("div", { className: "grid" });
-    const sec = el("section", { id: c.id }, [el("div", { className: "section-head" }, [el("h2", { textContent: c.name + "." }), el("p", { textContent: c.blurb })]), grid]);
+    const translated = categoryText(c);
+    const sec = el("section", { id: c.id }, [el("div", { className: "section-head" }, [el("h2", { textContent: translated.name }), el("p", { textContent: translated.blurb })]), grid]);
     sections.push({ c, sec, list });
     for (const fx of list) {
-      const cv = el("canvas", { ariaLabel: fx.name });
+      const cv = el("canvas", { ariaLabel: effectText(fx).name });
       const b = fx.mod.act ? actBounds(fx.mod) : null, [fw, fh] = b ? [b.x1 - b.x0, b.y1 - b.y0] : fx.meta.size;
       const fig = el("figure", { className: isScreen(fx) ? "tile big screen" : fw > 200 || fh > 170 || (b && (fw > 130 || fx.mod.act.target || fx.mod.act.targets)) ? "tile big" : "tile", tabIndex: 0 }, [
         el("div", { className: "stage" }, cv),
-        el("figcaption", {}, [el("b", { textContent: fx.name }), el("small", { textContent: fx.meta.loop ? "loop" : `${+fx.meta.duration.toFixed(2)}s` })]),
+        el("figcaption", {}, [el("b", { textContent: effectText(fx).name }), el("small", { textContent: fx.meta.loop ? t("loop") : t("seconds", { value: +fx.meta.duration.toFixed(2) }) })]),
       ]);
-      const t = { fx, fig, cv, player: null, visible: false, hover: false };
+      const tile = { fx, fig, cv, player: null, visible: false, hover: false };
       fig.addEventListener("click", () => openDetail(fx));
       fig.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), openDetail(fx)));
-      fig.addEventListener("pointerenter", () => (t.hover = true));
-      fig.addEventListener("pointerleave", () => (t.hover = false));
+      fig.addEventListener("pointerenter", () => (tile.hover = true));
+      fig.addEventListener("pointerleave", () => (tile.hover = false));
       grid.append(fig);
-      tiles.push(t);
+      tiles.push(tile);
     }
     main.append(sec);
   }
@@ -156,8 +160,8 @@ function chips() {
     b.addEventListener("click", () => setCat(id));
     box.append(b);
   };
-  mk("all", "all", FX.length);
-  for (const s of sections) mk(s.c.id, s.c.name, s.list.length);
+  mk("all", t("all"), FX.length);
+  for (const s of sections) mk(s.c.id, categoryText(s.c).name, s.list.length);
 }
 function setCat(id, fromHash = false) {
   state.cat = sections.some((s) => s.c.id === id) ? id : "all";
@@ -173,7 +177,7 @@ function filter() {
     let any = false;
     for (const fx of s.list) {
       const t = tiles.find((x) => x.fx === fx);
-      const hit = (state.cat === "all" || state.cat === s.c.id) && (!q || [fx.id, fx.name, fx.meta.desc, ...fx.meta.tags].join(" ").toLowerCase().includes(q));
+      const hit = (state.cat === "all" || state.cat === s.c.id) && (!q || fx.search.includes(q));
       t.fig.hidden = !hit;
       any ||= hit;
       shown += hit;
@@ -191,37 +195,49 @@ function openDetail(fx) {
   big.parentElement.classList.toggle("screen", screen);
   detail = screen ? new Player(big, fx, 16 / 9, 1) : new Player(big, fx, 16 / 10, 1.6);
   const m = fx.meta;
-  $("#d-name").textContent = m.name;
   $("#d-id").textContent = fx.id;
-  $("#d-desc").textContent = m.desc;
-  const frames = Math.round(m.duration * m.fps) + (m.loop ? 0 : 1);
-  $("#d-facts").replaceChildren(
-    ...[["kind", m.loop ? "loop" : "one-shot"], ["length", `${+m.duration.toFixed(2)} s, ${frames} frames at ${m.fps} fps`], ...(fx.mod.act ? [["acted", actFacts(fx.mod)]] : []), ["canvas", `${m.size[0]} × ${m.size[1]} px`], ["tags", m.tags.join(", ")]].flatMap(([k, v]) => [el("dt", { textContent: k }), el("dd", { textContent: v })]),
-  );
   // controls
-  $("#d-bg").replaceChildren(...BACKDROPS.concat("none").map((b) => btn(b, () => detail.setBg(b), b === m.bg, "bg")));
+  $("#d-bg").replaceChildren(...BACKDROPS.concat("none").map((b) => btn(backdropText(b), () => detail.setBg(b), b === m.bg, "bg")));
   $("#d-speed").replaceChildren(...[0.25, 0.5, 1].map((s) => btn(`${s}×`, () => (detail.speed = s), s === 1, "speed")));
-  const pal = $("#d-pal");
-  pal.replaceChildren(el("option", { value: "", textContent: "its own" }), ...Object.keys(PAL).map((k) => el("option", { value: k, textContent: k })));
-  pal.value = "";
+  $("#d-pal").replaceChildren();
   $("#d-actor").hidden = !m.actor;
   $("#d-actor").setAttribute("aria-pressed", "true");
   $("#d-flip").setAttribute("aria-pressed", "false");
   $("#d-play").setAttribute("aria-pressed", "true");
-  $("#d-play").textContent = "pause";
   $("#d-sheet").replaceChildren();
+  refreshDetailText();
   code(fx);
   d.showModal();
   d.scrollTop = 0;
+}
+function refreshDetailText() {
+  const fx = detail.fx, m = fx.meta, translated = effectText(fx);
+  $("#d-name").textContent = translated.name;
+  $("#d-desc").textContent = translated.desc;
+  $("#big").ariaLabel = translated.name;
+  const frames = Math.round(m.duration * m.fps) + (m.loop ? 0 : 1);
+  const facts = [
+    [t("kind"), m.loop ? t("loop") : t("once")],
+    [t("length"), t("lengthValue", { seconds: +m.duration.toFixed(2), frames, fps: m.fps })],
+    ...(fx.mod.act ? [[t("acted"), actFacts(fx.mod)]] : []),
+    [t("canvas"), t("canvasValue", { w: m.size[0], h: m.size[1] })],
+    [t("tags"), m.tags.map(tagText).join(t("tagSeparator"))],
+  ];
+  $("#d-facts").replaceChildren(...facts.flatMap(([k, v]) => [el("dt", { textContent: k }), el("dd", { textContent: v })]));
+  [...$("#d-bg").children].forEach((button, i) => { button.textContent = backdropText([...BACKDROPS, "none"][i]); });
+  const pal = $("#d-pal"), selected = pal.value;
+  pal.replaceChildren(el("option", { value: "", textContent: t("ownPalette") }), ...Object.keys(PAL).map((k) => el("option", { value: k, textContent: paletteText(k) })));
+  pal.value = selected;
+  $("#d-play").textContent = t(detail.playing ? "pause" : "play");
 }
 // what the body does around the effect, in a line: the wind-up, the freeze, the recovery
 function actFacts(mod) {
   const k = mod.act.poses, lead = Math.max(0, -k[0][0]), end = k[k.length - 1][0] - mod.meta.duration, hits = (mod.act.hits ?? []).filter((h) => h.stop);
   const parts = [];
-  if (lead > 0) parts.push(`${lead.toFixed(2)} s wind-up`);
-  if (hits.length) parts.push(`${hits.length === 1 ? `${Math.round(hits[0].stop * 1000)} ms freeze` : `${hits.length} freezes`} at ${hits[0].t.toFixed(2)} s`);
-  if (!mod.meta.loop && end > 0.02) parts.push(`${end.toFixed(2)} s recovery`);
-  return parts.join(", ") || "the body moves with it";
+  if (lead > 0) parts.push(t("windup", { seconds: lead.toFixed(2) }));
+  if (hits.length) parts.push(t(hits.length === 1 ? "freeze" : "freezes", { ms: Math.round(hits[0].stop * 1000), count: hits.length, at: hits[0].t.toFixed(2) }));
+  if (!mod.meta.loop && end > 0.02) parts.push(t("recovery", { seconds: end.toFixed(2) }));
+  return parts.join(t("separator")) || t("bodyMoves");
 }
 function btn(label, fn, on, group) {
   const b = el("button", { className: "btn", type: "button", textContent: label });
@@ -243,11 +259,11 @@ function code(fx) {
     `const frame = createFrame(320, 180);`,
     `const fx = ${make}(${v}, ${JSON.stringify(opts).replace(/"\[…\]"/, "[…]").replace(/"(\w+)":/g, "$1: ").replace(/,/g, ", ")});`,
     ``,
-    `// every tick`,
+    `// ${t("tickComment")}`,
     `fx.update(dt);`,
-    `fx.draw(frame);          // color + light buffers`,
+    `fx.draw(frame);          // ${t("buffersComment")}`,
     `composite(frame, imageData.data, null);`,
-    ...(acted ? [``, `// your own character? read the timing: ${v}.act (poses, hits, freezes)`] : []),
+    ...(acted ? [``, `// ${t("timingComment", { name: v })}`] : []),
   ].join("\n");
   $("#d-src").href = `${REPO}/blob/main/src/fx/${fx.id}.js`;
 }
@@ -264,8 +280,8 @@ function sheet() {
     ctx.putImageData(img, (i % cols) * w, Math.floor(i / cols) * h);
   }
   const k = Math.max(1, Math.min(4, Math.floor(1100 / (cols * w))));
-  const pic = el("img", { src: cv.toDataURL("image/png"), alt: `${m.name} sprite sheet`, width: cols * w * k, height: rows * h * k });
-  $("#d-sheet").replaceChildren(pic, el("p", { textContent: `${n} frames of ${w} × ${h} px, ${cols} across, ${m.fps} fps, ${m.loop ? "loops" : "plays once"}. Save the image, or run: node tools/render.mjs ${fx.id} --sheet` }));
+  const pic = el("img", { src: cv.toDataURL("image/png"), alt: t("sheetAlt", { name: effectText(fx).name }), width: cols * w * k, height: rows * h * k });
+  $("#d-sheet").replaceChildren(pic, el("p", { textContent: t("sheetInfo", { n, w, h, cols, fps: m.fps, mode: t(m.loop ? "loop" : "once"), command: `node tools/render.mjs ${fx.id} --sheet` }) }));
 }
 function wireDetail() {
   const d = $("#detail");
@@ -275,7 +291,7 @@ function wireDetail() {
   $("#d-play").addEventListener("click", (e) => {
     detail.playing = !detail.playing;
     e.target.setAttribute("aria-pressed", String(detail.playing));
-    e.target.textContent = detail.playing ? "pause" : "play";
+    e.target.textContent = t(detail.playing ? "pause" : "play");
   });
   $("#d-again").addEventListener("click", () => detail.restart());
   $("#d-flip").addEventListener("click", (e) => {
@@ -306,13 +322,47 @@ function wireDetail() {
     const text = $("#d-code").textContent;
     try {
       await navigator.clipboard.writeText(text);
-      e.target.textContent = "copied";
+      e.target.textContent = t("copied");
     } catch {
       getSelection().selectAllChildren($("#d-code"));
-      e.target.textContent = "selected";
+      e.target.textContent = t("selected");
     }
-    setTimeout(() => (e.target.textContent = "copy"), 1400);
+    setTimeout(() => (e.target.textContent = t("copy")), 1400);
   });
+}
+
+function applyLanguage() {
+  document.documentElement.lang = getLanguage();
+  document.title = t("title");
+  $("#language").value = getLanguage();
+  $("#subtitle").textContent = t("subtitle", { count: FX.length });
+  document.querySelectorAll("[data-i18n]").forEach((node) => { node.textContent = t(node.dataset.i18n); });
+  for (const attribute of ["placeholder", "aria-label", "content"]) {
+    document.querySelectorAll(`[data-i18n-${attribute}]`).forEach((node) => {
+      node.setAttribute(attribute, t(node.getAttribute(`data-i18n-${attribute}`)));
+    });
+  }
+  for (const { c, sec } of sections) {
+    const translated = categoryText(c);
+    sec.querySelector("h2").textContent = translated.name;
+    sec.querySelector(".section-head p").textContent = translated.blurb;
+  }
+  document.querySelectorAll(".chip").forEach((button) => {
+    const category = categories.find((c) => c.id === button.dataset.cat);
+    button.firstChild.nodeValue = category ? categoryText(category).name : t("all");
+  });
+  for (const tile of tiles) {
+    const translated = effectText(tile.fx);
+    tile.fig.querySelector("b").textContent = translated.name;
+    tile.fig.querySelector("small").textContent = tile.fx.meta.loop ? t("loop") : t("seconds", { value: +tile.fx.meta.duration.toFixed(2) });
+    tile.cv.ariaLabel = translated.name;
+    tile.fig.title = getLanguage() === "zh-CN" ? tile.fx.name : "";
+  }
+  if (detail) {
+    refreshDetailText();
+    code(detail.fx);
+    if ($("#d-sheet img")) sheet();
+  }
 }
 
 // ---- the clock
@@ -328,6 +378,11 @@ function frameLoop(now) {
 build();
 chips();
 wireDetail();
+applyLanguage();
+$("#language").addEventListener("change", (event) => {
+  setLanguage(event.target.value);
+  applyLanguage();
+});
 $("#q").addEventListener("input", (e) => {
   state.q = e.target.value;
   filter();

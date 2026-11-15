@@ -14,12 +14,13 @@
   --quiet: #999999;
   --line: #333333;
   --patch: #f53cd1;
-  --display: "Patch Pixel", ui-monospace, "SFMono-Regular", monospace;
-  --text: "Funnel Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "Red Hat Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --display: "Patch Pixel", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", ui-monospace, monospace;
+  --text: "Funnel Sans", system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  --mono: "Red Hat Mono", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", ui-monospace, Menlo, monospace;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { background: var(--ground); }
 body {
   margin: 0;
@@ -57,7 +58,8 @@ button, input, select { font: inherit; color: inherit; }
 .mark { width: 42px; height: 42px; flex: none; image-rendering: pixelated; margin-top: 4px; }
 h1 { margin: 0; font: 400 54px/66px var(--display); letter-spacing: 0; }
 .sub { margin: 4px 0 0; font: 500 17px/1.4 var(--text); color: var(--quiet); text-wrap: balance; }
-.links { display: flex; gap: 20px; font: 500 13px/1 var(--mono); letter-spacing: 0.04em; }
+.links { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; font: 500 13px/1.4 var(--mono); letter-spacing: 0.04em; }
+.language { display: inline-flex; gap: 8px; align-items: center; color: var(--quiet); }
 .links a { text-decoration: none; color: var(--quiet); padding: 6px 0; border-bottom: 1px solid var(--line); }
 .links a:hover { color: var(--ink); border-color: var(--ink); }
 
@@ -88,7 +90,7 @@ h1 { margin: 0; font: 400 54px/66px var(--display); letter-spacing: 0; }
 .chip[aria-pressed="true"] span { color: #555; }
 #q {
   flex: none;
-  width: 108px;
+  width: 168px;
   max-width: 40vw;
   background: none;
   border: 1px solid var(--line);
@@ -153,6 +155,8 @@ main { max-width: 1240px; margin: 0 auto; }
 }
 .info h2 { margin: 0; font: 400 36px/44px var(--display); }
 .info .id { font: 400 12px/1.4 var(--mono); color: var(--quiet); margin: 4px 0 12px; letter-spacing: 0.04em; }
+.info .id, .facts dd { overflow-wrap: anywhere; }
+html:lang(zh-CN) .section-head h2, html:lang(zh-CN) .info h2 { line-height: 1.4; }
 .info p { margin: 0 0 16px; color: #ddd; }
 .facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font: 400 12px/1.5 var(--mono); margin: 0 0 20px; }
 .facts dt { color: var(--quiet); }

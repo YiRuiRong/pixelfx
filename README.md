@@ -19,6 +19,8 @@ palette, and start a browser game from it.
 [the skill](#the-skill) · [make your own](#make-your-own) · [publish it on patch](#publish-it-on-patch) ·
 [how it works](#how-it-works)
 
+本地特效库已支持简体中文，首次打开默认使用中文，右上角可切换 English。支持中英文搜索；用 `node tools/serve.mjs` 启动后访问 `http://localhost:8080/gallery/`。详见[中文补丁说明](docs/LOCALIZATION.zh-CN.md)。
+
 The method is [Hugo Duprez](https://x.com/HugoDuprez)'s, from [How to make (good) pixel art effects with
 Claude](https://www.spritefusion.com/blog/how-to-make-good-pixel-art-effects-with-claude): code is clay, trust your
 eyes, feed your references. His [open-source effects](https://www.spritefusion.com/pixel-art-vfx) at Sprite Fusion
