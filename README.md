@@ -4,7 +4,7 @@
 
 # pixelfx.
 
-**<!-- count -->244<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
+**<!-- count -->245<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
 explosions, magic, weather, UI, pickups, critters and more. Play them live, recolor and mirror them, drop them into
 a browser game, or export sprite sheets for any engine. Plus a Claude Code skill that makes new ones the way a
 picky pixel artist would: draft, render, look, refine.
@@ -20,6 +20,8 @@ palette, and start a browser game from it.
 [how it works](#how-it-works)
 
 本地特效库已支持简体中文，首次打开默认使用中文，右上角可切换 English。支持中英文搜索；用 `node tools/serve.mjs` 启动后访问 `http://localhost:8080/gallery/`。详见[中文补丁说明](docs/LOCALIZATION.zh-CN.md)。
+
+漫画风试作：[漫画飓风](docs/COMIC-HURRICANE.zh-CN.md)，在“自然”分类中预览；使用深色描边、青白风带、硬边明暗与网点，支持透明图集导出。
 
 The method is [Hugo Duprez](https://x.com/HugoDuprez)'s, from [How to make (good) pixel art effects with
 Claude](https://www.spritefusion.com/blog/how-to-make-good-pixel-art-effects-with-claude): code is clay, trust your
@@ -47,7 +49,7 @@ the idea at library scale, with a skill to keep going.
 | **holy** | 10 | blessing, divine shield, feather burst, halo, heal, healing ring… |
 | **shadow** | 12 | black hole, curse, dark explosion, eclipse, grasping hands, hex sigil… |
 | **status** | 13 | bleeding, burning, charmed, confused, cursed, frozen… |
-| **nature** | 13 | acid splash, boulder, earth spike, healing bloom, leaf storm, poison cloud… |
+| **nature** | 14 | acid splash, boulder, comic hurricane, earth spike, healing bloom, leaf storm… |
 | **weather** | 12 | aurora, blizzard, cherry blossoms, clouds, falling leaves, fireflies… |
 | **ui** | 12 | achievement, coin collect, combo counter, confetti, countdown, crit number… |
 | **pickups** | 11 | chest open, coin spin, collect burst, crystal shard, gem spin, heart pickup… |

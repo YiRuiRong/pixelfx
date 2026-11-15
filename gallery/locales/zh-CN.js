@@ -16,7 +16,7 @@ export const categories = {
   holy: ["神圣", "治愈、光环与圣光之柱"],
   shadow: ["暗影", "诅咒、虚空、触须与灵魂"],
   status: ["状态", "燃烧、冰冻、中毒与睡眠"],
-  nature: ["自然", "毒素、藤蔓、荆棘与地震"],
+  nature: ["自然", "飓风、毒素、藤蔓、荆棘与地震"],
   weather: ["天气", "降雨、飘雪、薄雾与极光"],
   ui: ["界面提示", "升级、数字、提示条与倒计时"],
   pickups: ["拾取物", "金币、宝石、宝箱与药水"],
@@ -36,6 +36,7 @@ export const palettes = {
 export const backdrops = { dark: "深色", ground: "地面", sky: "天空", light: "浅色", black: "纯黑", none: "透明" };
 
 export const tags = {
+  hurricane: "飓风",
   abduct: "牵引捕获", achievement: "成就", acid: "酸液", actor: "角色", alert: "警示", ambient: "环境",
   angel: "天使", anger: "愤怒", animal: "动物", anime: "动漫", aoe: "范围效果", appear: "出现",
   arc: "弧线", arcane: "奥术", area: "区域", arms: "手臂", arrive: "抵达", arrow: "箭矢",

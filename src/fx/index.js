@@ -176,6 +176,7 @@ import * as status_slowed from "./status/slowed.js";
 import * as status_stunned from "./status/stunned.js";
 import * as nature_acid_splash from "./nature/acid-splash.js";
 import * as nature_boulder from "./nature/boulder.js";
+import * as nature_comic_hurricane from "./nature/comic-hurricane.js";
 import * as nature_earth_spike from "./nature/earth-spike.js";
 import * as nature_healing_bloom from "./nature/healing-bloom.js";
 import * as nature_leaf_storm from "./nature/leaf-storm.js";
@@ -424,6 +425,7 @@ export const effects = {
   "status/stunned": status_stunned,
   "nature/acid-splash": nature_acid_splash,
   "nature/boulder": nature_boulder,
+  "nature/comic-hurricane": nature_comic_hurricane,
   "nature/earth-spike": nature_earth_spike,
   "nature/healing-bloom": nature_healing_bloom,
   "nature/leaf-storm": nature_leaf_storm,

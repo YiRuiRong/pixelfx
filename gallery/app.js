@@ -250,13 +250,20 @@ function btn(label, fn, on, group) {
 }
 function code(fx) {
   const v = fx.id.split("/")[1].replace(/-(\w)/g, (_, c) => c.toUpperCase());
-  const opts = { x: 160, y: 120, ...(detail.opts.palette ? { palette: "[…]" } : {}), ...(detail.flip ? { flip: true } : {}) };
   const acted = !!fx.mod.act, make = acted ? "createAct" : "createFx";
+  const [mw, mh] = fx.meta.size, [ox, oy] = fx.meta.origin;
+  const b = acted ? actBounds(fx.mod) : { x0: -ox, y0: -oy, x1: mw - ox, y1: mh - oy };
+  const w = Math.max(320, Math.ceil(b.x1 - b.x0)), h = Math.max(180, Math.ceil(b.y1 - b.y0));
+  const opts = {
+    x: Math.floor((w - (b.x1 - b.x0)) / 2) - b.x0,
+    y: Math.floor((h - (b.y1 - b.y0)) / 2) - b.y0,
+    ...(detail.opts.palette ? { palette: "[…]" } : {}), ...(detail.flip ? { flip: true } : {}),
+  };
   $("#d-code").textContent = [
     `import { createFrame, ${make}, composite } from "pixelfx";`,
     `import * as ${v} from "pixelfx/fx/${fx.id}";`,
     ``,
-    `const frame = createFrame(320, 180);`,
+    `const frame = createFrame(${w}, ${h});`,
     `const fx = ${make}(${v}, ${JSON.stringify(opts).replace(/"\[…\]"/, "[…]").replace(/"(\w+)":/g, "$1: ").replace(/,/g, ", ")});`,
     ``,
     `// ${t("tickComment")}`,
