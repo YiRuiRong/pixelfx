@@ -4,7 +4,7 @@
 
 # pixelfx.
 
-**<!-- count -->248<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
+**<!-- count -->256<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
 explosions, magic, weather, UI, pickups, critters and more. Play them live, recolor and mirror them, drop them into
 a browser game, or export sprite sheets for any engine. Plus a Claude Code skill that makes new ones the way a
 picky pixel artist would: draft, render, look, refine.
@@ -25,6 +25,16 @@ palette, and start a browser game from it.
 
 漫画风试作：[漫画飓风](docs/COMIC-HURRICANE.zh-CN.md)，在“自然”分类中预览；使用深色描边、青白风带、硬边明暗与网点，支持透明图集导出。
 
+漫画系列新增：[风压巨拳、空间拉链、弹簧雷云](docs/COMIC-TRIO.zh-CN.md)，分别位于“近战”“奥术”“雷电”分类；支持中文搜索、换色、镜像和透明图集导出。
+
+蒸汽工业系列：[活塞重锤](docs/STEAM-PISTON-HAMMER.zh-CN.md)，在“近战”分类中预览；采用煤烟伦敦的阴郁工业风，黑铁、暗铜、炉火与油污构成主体，重砸裂开石面并压出灰汽，停顿后缓慢拔起。
+
+暗黑漫画系列：[撕页斩、缝影绞索](docs/NOIR-PAIR.zh-CN.md)，分别位于“近战”“暗影”分类；煤黑纸边翻卷合拢，暗红线逐针缝住影子并绷紧、断开。搜索“暗黑漫画”可一起预览。
+
+暗黑漫画新增：[缝界收袋](docs/NOIR-SEAM-POUCH.zh-CN.md)，位于“暗影”分类；三扣缝出区域，地面化成黑布后提边收紧，最后撕裂散落。支持传入三个节点，提供完整动画、透明图集和阶段时刻。
+
+镜面主题：[迟到的倒影](docs/DELAYED-REFLECTION.zh-CN.md)，位于“奥术”分类；镜中阳光先行、现实光刃随后穿镜，碎片里仍有流动的天空，最后化作雨滴与水洼倒影。支持换色、镜像、云速调整和透明图集导出。
+
 The method is [Hugo Duprez](https://x.com/HugoDuprez)'s, from [How to make (good) pixel art effects with
 Claude](https://www.spritefusion.com/blog/how-to-make-good-pixel-art-effects-with-claude): code is clay, trust your
 eyes, feed your references. His [open-source effects](https://www.spritefusion.com/pixel-art-vfx) at Sprite Fusion
@@ -41,15 +51,15 @@ the idea at library scale, with a skill to keep going.
 | **explosions** | 12 | barrel explosion, big explosion, cartoon pow, dirt explosion, firework burst, firework rocket… |
 | **water** | 12 | bubbles, drip, fountain, geyser, rain splash, ripples… |
 | **ice** | 10 | blizzard vortex, freeze, frost breath, frost nova, ice crystal, ice lance… |
-| **lightning** | 11 | ball lightning, chain lightning, charge up, electrified, lightning strike, plasma ball… |
+| **lightning** | 12 | ball lightning, chain lightning, charge up, comic spring cloud, electrified, lightning strike… |
 | **sci-fi** | 12 | emp blast, energy core, force field, glitch, hologram, jetpack… |
-| **melee** | 12 | claw swipe, dagger flurry, double slash, hammer smash, heavy cleave, scythe reap… |
+| **melee** | 15 | claw swipe, comic wind fist, dagger flurry, double slash, hammer smash, heavy cleave… |
 | **impacts** | 11 | blunt hit, bullet impact, critical hit, ground slam, heavy landing, hit flash… |
 | **projectiles** | 13 | arrow, bullet tracer, cannon shot, energy disc, signal flare, homing missile… |
 | **spawn & death** | 10 | coin drop, disintegrate, dissolve burn, egg hatch, poof, respawn beam… |
-| **arcane** | 12 | arcane beam, arcane missiles, arcane orb, blink in, blink out, magic circle cast… |
+| **arcane** | 14 | arcane beam, arcane missiles, arcane orb, blink in, blink out, comic space zipper… |
 | **holy** | 10 | blessing, divine shield, feather burst, halo, heal, healing ring… |
-| **shadow** | 12 | black hole, curse, dark explosion, eclipse, grasping hands, hex sigil… |
+| **shadow** | 14 | black hole, curse, dark explosion, eclipse, grasping hands, hex sigil… |
 | **status** | 13 | bleeding, burning, charmed, confused, cursed, frozen… |
 | **nature** | 14 | acid splash, boulder, comic hurricane, earth spike, healing bloom, leaf storm… |
 | **weather** | 12 | aurora, blizzard, cherry blossoms, clouds, falling leaves, fireflies… |

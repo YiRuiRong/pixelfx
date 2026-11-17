@@ -64,6 +64,7 @@ import * as ice_snowflake_burst from "./ice/snowflake-burst.js";
 import * as lightning_ball_lightning from "./lightning/ball-lightning.js";
 import * as lightning_chain_lightning from "./lightning/chain-lightning.js";
 import * as lightning_charge_up from "./lightning/charge-up.js";
+import * as lightning_comic_spring_cloud from "./lightning/comic-spring-cloud.js";
 import * as lightning_electrified from "./lightning/electrified.js";
 import * as lightning_lightning_strike from "./lightning/lightning-strike.js";
 import * as lightning_plasma_ball from "./lightning/plasma-ball.js";
@@ -85,13 +86,16 @@ import * as scifi_tractor_beam from "./scifi/tractor-beam.js";
 import * as scifi_warp_in from "./scifi/warp-in.js";
 import * as scifi_warp_out from "./scifi/warp-out.js";
 import * as melee_claw_swipe from "./melee/claw-swipe.js";
+import * as melee_comic_wind_fist from "./melee/comic-wind-fist.js";
 import * as melee_dagger_flurry from "./melee/dagger-flurry.js";
 import * as melee_double_slash from "./melee/double-slash.js";
 import * as melee_hammer_smash from "./melee/hammer-smash.js";
 import * as melee_heavy_cleave from "./melee/heavy-cleave.js";
+import * as melee_noir_page_rend from "./melee/noir-page-rend.js";
 import * as melee_scythe_reap from "./melee/scythe-reap.js";
 import * as melee_spear_sweep from "./melee/spear-sweep.js";
 import * as melee_spin_slash from "./melee/spin-slash.js";
+import * as melee_steam_piston_hammer from "./melee/steam-piston-hammer.js";
 import * as melee_sword_slash from "./melee/sword-slash.js";
 import * as melee_thrust from "./melee/thrust.js";
 import * as melee_uppercut from "./melee/uppercut.js";
@@ -135,6 +139,8 @@ import * as arcane_arcane_missiles from "./arcane/arcane-missiles.js";
 import * as arcane_arcane_orb from "./arcane/arcane-orb.js";
 import * as arcane_blink_in from "./arcane/blink-in.js";
 import * as arcane_blink_out from "./arcane/blink-out.js";
+import * as arcane_comic_space_zipper from "./arcane/comic-space-zipper.js";
+import * as arcane_delayed_reflection from "./arcane/delayed-reflection.js";
 import * as arcane_magic_circle_cast from "./arcane/magic-circle-cast.js";
 import * as arcane_mana_burst from "./arcane/mana-burst.js";
 import * as arcane_portal from "./arcane/portal.js";
@@ -160,6 +166,8 @@ import * as shadow_grasping_hands from "./shadow/grasping-hands.js";
 import * as shadow_hex_sigil from "./shadow/hex-sigil.js";
 import * as shadow_life_steal from "./shadow/life-steal.js";
 import * as shadow_necro_skulls from "./shadow/necro-skulls.js";
+import * as shadow_noir_seam_pouch from "./shadow/noir-seam-pouch.js";
+import * as shadow_noir_shadow_stitch from "./shadow/noir-shadow-stitch.js";
 import * as shadow_shadow_flames from "./shadow/shadow-flames.js";
 import * as shadow_shadow_tendrils from "./shadow/shadow-tendrils.js";
 import * as shadow_soul_drain from "./shadow/soul-drain.js";
@@ -316,6 +324,7 @@ export const effects = {
   "lightning/ball-lightning": lightning_ball_lightning,
   "lightning/chain-lightning": lightning_chain_lightning,
   "lightning/charge-up": lightning_charge_up,
+  "lightning/comic-spring-cloud": lightning_comic_spring_cloud,
   "lightning/electrified": lightning_electrified,
   "lightning/lightning-strike": lightning_lightning_strike,
   "lightning/plasma-ball": lightning_plasma_ball,
@@ -337,13 +346,16 @@ export const effects = {
   "scifi/warp-in": scifi_warp_in,
   "scifi/warp-out": scifi_warp_out,
   "melee/claw-swipe": melee_claw_swipe,
+  "melee/comic-wind-fist": melee_comic_wind_fist,
   "melee/dagger-flurry": melee_dagger_flurry,
   "melee/double-slash": melee_double_slash,
   "melee/hammer-smash": melee_hammer_smash,
   "melee/heavy-cleave": melee_heavy_cleave,
+  "melee/noir-page-rend": melee_noir_page_rend,
   "melee/scythe-reap": melee_scythe_reap,
   "melee/spear-sweep": melee_spear_sweep,
   "melee/spin-slash": melee_spin_slash,
+  "melee/steam-piston-hammer": melee_steam_piston_hammer,
   "melee/sword-slash": melee_sword_slash,
   "melee/thrust": melee_thrust,
   "melee/uppercut": melee_uppercut,
@@ -387,6 +399,8 @@ export const effects = {
   "arcane/arcane-orb": arcane_arcane_orb,
   "arcane/blink-in": arcane_blink_in,
   "arcane/blink-out": arcane_blink_out,
+  "arcane/comic-space-zipper": arcane_comic_space_zipper,
+  "arcane/delayed-reflection": arcane_delayed_reflection,
   "arcane/magic-circle-cast": arcane_magic_circle_cast,
   "arcane/mana-burst": arcane_mana_burst,
   "arcane/portal": arcane_portal,
@@ -412,6 +426,8 @@ export const effects = {
   "shadow/hex-sigil": shadow_hex_sigil,
   "shadow/life-steal": shadow_life_steal,
   "shadow/necro-skulls": shadow_necro_skulls,
+  "shadow/noir-seam-pouch": shadow_noir_seam_pouch,
+  "shadow/noir-shadow-stitch": shadow_noir_shadow_stitch,
   "shadow/shadow-flames": shadow_shadow_flames,
   "shadow/shadow-tendrils": shadow_shadow_tendrils,
   "shadow/soul-drain": shadow_soul_drain,

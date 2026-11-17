@@ -1,6 +1,6 @@
 # Catalog
 
-248 effects in 21 categories. Every one is a file in
+256 effects in 21 categories. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -108,6 +108,7 @@ strikes, arcs, coils, storms.
 | Ball lightning | `lightning/ball-lightning` | loop 4s | 136×104 | A crackling ball of plasma drifts on a wandering loop, spitting arcs off its skin and leaving a wake of fading motes, and zaps the floor when it dips low. |
 | Chain lightning | `lightning/chain-lightning` | one-shot 1.8s | 248×104 | A bolt leaps from the caster's hand through three targets in turn; each flashes, sparks and grounds itself to the floor while the arcs between them flicker, then the chain snaps. |
 | Charge up | `lightning/charge-up` | one-shot 2.7s | 272×184 | Sparks streak and arcs whip in to a crackling core at the caster's hand that swells and pulses faster, then it flashes and bursts: bolts every way, a ring, a spray of sparks. |
+| Comic spring cloud | `lightning/comic-spring-cloud` | one-shot 3s | 384×384 | A cloud squashes a zigzag lightning spring, fires it into a ground starburst, then rebounds with two diminishing bounces above curling dust. |
 | Electrified | `lightning/electrified` | loop 2s | 108×92 | Current runs through a character: arcs crawl over and leap across the body, sparks spit off, the body flares to an electric silhouette on each jolt, and the feet ground out. |
 | Lightning strike | `lightning/lightning-strike` | one-shot 3s | 240×264 | A targeted strike: a sigil charges on the floor, the scene darkens, a thick bolt slams into it, arcs race out along the cracks it splits, the channel crumbles to a scorch. |
 | Plasma ball | `lightning/plasma-ball` | loop 3s | 112×104 | A glass globe on a dark pedestal: wandering plasma tendrils reach from the core to the glass and fan out in bright feet where they touch it, lighting the stand and floor. |
@@ -143,13 +144,16 @@ slashes, smears, cleaves, combos.
 | effect | id | | size | what it does |
 |---|---|---|---|---|
 | Claw swipe | `melee/claw-swipe` | one-shot 0.9s | 128×96 | Three claw marks rake down one after another, white-hot, cooling through orange to red, then close up from both ends and leave a dotted scar, with hot flecks and drips. |
+| Comic wind fist | `melee/comic-wind-fist` | one-shot 2.5s | 448×320 | White wind ribbons knot into a giant fist, coil back, punch into a flat impact star, then unravel into curling gusts and chips. |
 | Dagger flurry | `melee/dagger-flurry` | one-shot 0.95s | 148×104 | A flurry of small quick crescents at every angle in front of the fighter, each with a flick of sparks, finished by one big cut that glints and bursts. |
 | Double slash | `melee/double-slash` | one-shot 0.8s | 164×108 | A down cut, then an up cut that crosses it: the moment the X closes both strokes flash white, the crossing bursts with light and sparks, and a dotted X lingers. |
 | Hammer smash | `melee/hammer-smash` | one-shot 2s | 208×112 | A hammer drops in front in a wedge of motion: a white slam with rays, a dome of force, a dent with cracks, rocks thrown up that bounce and settle, and dust. |
 | Heavy cleave | `melee/heavy-cleave` | one-shot 1.9s | 208×116 | A glint over the head, then a thick ember arc accelerates over the top into the floor: a white slam, glowing cracks, dust rolling both ways, grit and rising embers. |
+| Noir page rend | `melee/noir-page-rend` | one-shot 3.25s | 448×384 | A pale scratch tears space into curled black paper around a wine-red cut; the thick lips snap shut and shed slowly tumbling inked scraps. |
 | Scythe reap | `melee/scythe-reap` | one-shot 2.1s | 184×116 | A slow, huge dark crescent reaps round the front with a pale ghostly edge; it hangs, then tears away from the tail into curling wisps and cold vapour. |
 | Spear sweep | `melee/spear-sweep` | one-shot 1.5s | 216×84 | A wide low sweep at shin height: a long flat crescent swings from behind the legs round the front, and the wind of it kicks a wake of dust and grit along the floor. |
 | Spin slash | `melee/spin-slash` | one-shot 0.8s | 208×104 | The blade whirls once round the waist on a tilted plane, behind the body and back in front; the closed ring flares white, dissolves into a dotted trace and throws sparks. |
+| Steam piston hammer | `melee/steam-piston-hammer` | one-shot 4s | 448×448 | A soot-black industrial hammer ratchets on tarnished brass pistons, slams into broken stone and low coal-smoke steam, then labours upward through lingering vapour. |
 | Sword slash | `melee/sword-slash` | one-shot 0.75s | 136×104 | A tilted crescent whips round in two frames, cools from white to deep blue as it trails off, glints at the tip and throws sparks. |
 | Thrust | `melee/thrust` | one-shot 0.75s | 196×76 | A piercing stab: a bundle of streaks shoots out from the hand to a point, a long four-point star flares at the tip with a pierce ring, sparks and speed lines. |
 | Uppercut | `melee/uppercut` | one-shot 0.85s | 132×128 | A crescent rises from the floor past the face, and at the top a comic impact star bursts: bold outline, hot core, burst lines, twinkles and sparks. |
@@ -221,6 +225,8 @@ portals, runes, missiles, beams.
 | Arcane orb | `arcane/arcane-orb` | loop 2.4s | 136×112 | A floating orb of smoky violet glass with a swirl turning round a white-hot heart, two tilted rings of light orbiting behind and in front. |
 | Blink in | `arcane/blink-in` | one-shot 1.4s | 136×96 | Glittering bits spiral in to a point of light that opens into a line, then into a white silhouette that cools into the caster. |
 | Blink out | `arcane/blink-out` | one-shot 1.6s | 136×96 | The caster crackles with gathering light, flashes white, squeezes into a line of light that collapses and pops away in sparks. |
+| Comic space zipper | `arcane/comic-space-zipper` | one-shot 3.5s | 384×384 | A crooked zipper peels open curled paper edges onto a dark screentone pocket, sucks in orbiting chips, then races shut with a sharp snap. |
+| Delayed reflection | `arcane/delayed-reflection` | one-shot 6.5s | 480×384 | Sunlight cuts a reflected figure before a blade escapes the mirror. The glass breaks into shards of moving sky, melts into rain and leaves reflections in the puddles. |
 | Magic circle cast | `arcane/magic-circle-cast` | one-shot 3.9s | 200×220 | A circle draws itself on the floor, runes ignite one by one, it flashes, and a column of light fires up and breaks apart into glints. |
 | Mana burst | `arcane/mana-burst` | one-shot 1.8s | 208×150 | Energy rushes into a point and blows out in a white flash and rings, flinging glowing runes that flare and pop into sparks one after another. |
 | Portal | `arcane/portal` | loop 2.4s | 152×116 | An upright rift: fibrous spiral arms wind down into the dark, a lit rim wobbles, motes and streaks are pulled in, the floor glows. |
@@ -260,6 +266,8 @@ curses, voids, tendrils, souls.
 | Hex sigil | `shadow/hex-sigil` | one-shot 4.2s | 168×128 | A burning pen traces a cursed sigil in the air, its glyphs pop in one by one, then it flares white and crumbles into falling embers. |
 | Life steal | `shadow/life-steal` | one-shot 2.2s | 184×100 | A target on the right is struck and bleeds red orbs; they hang a moment, then whip home as comet streaks and flood the caster crimson. |
 | Necro skulls | `shadow/necro-skulls` | loop 3s | 136×116 | Spectral skulls circle a cold green flame on a tilted orbit, passing behind and before it, eyes lit, trailing curls of ghost smoke. |
+| Noir seam pouch | `shadow/noir-seam-pouch` | one-shot 5.5s | 448×384 | Three iron clasps stitch a crimson triangle. Its floor turns to charcoal cloth, rises into a deeply pleated pouch, cinches shut, then tears into falling fabric strips. |
+| Noir shadow stitch | `shadow/noir-shadow-stitch` | one-shot 4.5s | 448×336 | Four iron eye-nails pin a human shadow. Crimson thread stitches its edges, cinches it into sharp pleats, then snaps strand by strand and hangs loose. |
 | Shadow flames | `shadow/shadow-flames` | loop 2.4s | 104×112 | Inside-out fire on the floor: a black heart wrapped in violet flame with pale skin and tips, shedding embers and dark smoke. |
 | Shadow tendrils | `shadow/shadow-tendrils` | one-shot 3.2s | 208×130 | A dark pool opens on the floor; tentacles with lit rims and hooked tips lash up out of it with a splash, writhe, and sink back as it closes. |
 | Soul drain | `shadow/soul-drain` | loop 3.2s | 208×120 | Pale souls are torn loose on the right and dragged down a funnel of streaks into a black crystal vessel, which flares violet as each one lands. |

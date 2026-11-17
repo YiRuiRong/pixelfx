@@ -36,7 +36,11 @@ export const palettes = {
 export const backdrops = { dark: "深色", ground: "地面", sky: "天空", light: "浅色", black: "纯黑", none: "透明" };
 
 export const tags = {
+  mirror: "镜面", reflection: "倒影", delay: "延迟",
+  noir: "暗黑漫画", paper: "纸页", tear: "撕裂", stitch: "缝合", thread: "丝线", nail: "钉刺", bind: "束缚", cloth: "布料",
   "bat-form": "蝠化", swarm: "群集", dodge: "闪避", reprisal: "反击", transform: "化形",
+  piston: "活塞", industrial: "工业时代",
+  fist: "巨拳", zipper: "拉链", "spring-loaded": "弹簧蓄力", pull: "牵引", seal: "封印",
   hurricane: "飓风",
   abduct: "牵引捕获", achievement: "成就", acid: "酸液", actor: "角色", alert: "警示", ambient: "环境",
   angel: "天使", anger: "愤怒", animal: "动物", anime: "动漫", aoe: "范围效果", appear: "出现",
