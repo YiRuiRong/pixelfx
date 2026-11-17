@@ -23,6 +23,7 @@ for (const id of ids) {
   if (flags.sheet) {
     const r = renderAct(fx, { fps: fx.meta.fps, bg: "none", target: !flags["no-target"], hold: 0 }), name = id.split("/")[1], base = join(ROOT, "records", "act", id.replace("/", "-"));
     const s = spriteSheet(fx, r, name);
+    s.json.meta.image = `${id.replace("/", "-")}.sheet.png`;
     s.json.meta.pixelfx.pivot = r.pivot;
     save(`${base}.sheet.png`, s.png);
     save(`${base}.sheet.json`, JSON.stringify(s.json, null, 1));

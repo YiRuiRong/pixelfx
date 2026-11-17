@@ -360,7 +360,15 @@ export function createAct(mod, o = {}) {
         drawTargets();
         shadow();
         drawGhosts();
-        for (let i = 0; i < r.n; i++) paint(i, r.color[i]);
+        // A transform can replace the body without remapping its world-space flock onto the rig.
+        const tt = meta.loop ? (t < 0 ? 0 : t % D) : clamp(t, 0, D);
+        const alpha = active ? actorAlphaOf(mod, tt, fx.options) : 1;
+        if (alpha >= 1) {
+          for (let i = 0; i < r.n; i++) paint(i, r.color[i]);
+        } else if (alpha > 0) {
+          const p = painterFor(frame).place(X, Y, flip);
+          for (let i = 0; i < r.n; i++) p.dot(rx + r.xs[i], ry + r.ys[i], r.color[i], alpha);
+        }
         if (active) fx.draw(frame, "front");
         drawStraw();
         drawDust();

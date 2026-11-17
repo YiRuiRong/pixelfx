@@ -51,7 +51,8 @@ export async function loadEffect(id, dir = FX_DIR) {
  * clear: RGBA on transparency }] }. opts: { fps, seed, bg, margin, options (passed to the effect) }.
  */
 export function renderFrames(fx, opts = {}) {
-  const { meta } = fx, [W, H] = meta.size, [OX, OY] = meta.origin, m = opts.margin ?? 0;
+  const { meta } = fx, [W, H] = meta.size, [ox, OY] = meta.origin, m = opts.margin ?? 0;
+  const OX = opts.options?.flip ? W - ox : ox;
   const w = W + m * 2, h = H + m * 2, fps = opts.fps ?? meta.fps;
   const n = Math.max(1, Math.round(meta.duration * fps) + (meta.loop ? 0 : 1));
   const shown = createFrame(w, h, -m, -m), bare = createFrame(w, h, -m, -m);
@@ -79,7 +80,7 @@ export function renderFrames(fx, opts = {}) {
       light: bare.light.slice(),
     });
   }
-  return { w, h, fps, n, frames, margin: m };
+  return { w, h, fps, n, frames, margin: m, pivot: [OX + m, OY + m] };
 }
 
 /**
@@ -88,7 +89,8 @@ export function renderFrames(fx, opts = {}) {
  */
 export function renderAct(fx, opts = {}) {
   const { meta } = fx, fps = opts.fps ?? 60, b = actBounds(fx.mod), pad = opts.pad ?? 6;
-  const w = b.x1 - b.x0 + pad * 2, h = b.y1 - b.y0 + pad * 2, X = pad - b.x0, Y = pad - b.y0;
+  const w = b.x1 - b.x0 + pad * 2, h = b.y1 - b.y0 + pad * 2;
+  const X = opts.options?.flip ? w - (pad - b.x0) : pad - b.x0, Y = pad - b.y0;
   const frame = createFrame(w, h), bgKind = opts.bg ?? meta.bg, bg = bgKind === "none" ? null : backdrop(bgKind, w, h, Y);
   const act = createAct(fx.mod, { x: X, y: Y, ...(opts.seed !== undefined ? { seed: opts.seed } : {}), ...(opts.options ?? {}) });
   const frames = [], max = Math.round((opts.seconds ?? (meta.loop ? meta.duration * 2 - act.t : 8)) * fps);
@@ -236,7 +238,7 @@ export function spriteSheet(fx, r, name) {
     app: "https://github.com/patch-gg/pixelfx", version: "1", image: `${name}.png`, format: "RGBA8888",
     size: { w: cols * w, h: rows * h }, scale: "1",
     frameTags: [{ name: name, from: 0, to: n - 1, direction: "forward" }],
-    pixelfx: { id: fx.id, name: m.name, fps, loop: m.loop, frames: n, frameSize: [w, h], pivot: m.origin, columns: cols, ...(fx.mod.act ? { act: actTiming(fx.mod) } : {}) },
+    pixelfx: { id: fx.id, name: m.name, fps, loop: m.loop, frames: n, frameSize: [w, h], pivot: r.pivot ?? m.origin, columns: cols, ...(fx.mod.act ? { act: actTiming(fx.mod) } : {}) },
   };
   return { png: img.png(), json };
 }

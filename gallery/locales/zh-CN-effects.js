@@ -1,5 +1,8 @@
 // Display translations keyed by stable effect IDs. Effect code and metadata stay original.
 export default {
+  "moves/bat-dodge": ["惊蝠脱身", "攻击穿过空洞的人形，身体骤然散成银边蝠群，向后闪开，再围绕暗红心跳重新聚合。"],
+  "moves/bat-nightflight": ["掠夜", "身体化为前尖后散的蝠群，领飞蝙蝠带着两股起伏尾流掠行，抵达时折翼急停，重新拼回人形。"],
+  "moves/bat-reprisal": ["回噬", "散开的蝠群绕出回钩扑向敌人，手臂率先重聚并抓击；命中短暂停顿，余下蝙蝠随后补回身体。"],
   "moves/arrow-shot": ["弓箭射击", "举弓拉弦至脸颊，屏息松手；弓弦弹回，箭矢掠过场地，扎入目标。"],
   "moves/dash-strike": ["突进斩", "屈身蓄势，拖着残影迅速冲过场地并挥斩；暴击命中，稍作停顿，再跃回原位。"],
   "moves/earth-stomp": ["大地践踏", "抬膝重踏地面，目标脚下的大地隆起，一根石刺破土而出。"],

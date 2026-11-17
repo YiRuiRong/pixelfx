@@ -1,6 +1,6 @@
 # Catalog
 
-245 effects in 21 categories. Every one is a file in
+248 effects in 21 categories. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -10,6 +10,9 @@ whole attacks, wind-up to recovery, chained from the effects below.
 | effect | id | | size | what it does |
 |---|---|---|---|---|
 | Arrow shot | `moves/arrow-shot` | one-shot 1.9s | 300×74 | He raises the bow, draws to his cheek, holds his breath and looses: the string snaps forward, the arrow crosses the floor and thuds home. |
+| Startled bat escape | `moves/bat-dodge` | one-shot 0.8s | 188×124 | A blow passes through a hollow silhouette: the body bursts into silver-edged bats, slips backwards, then folds together around a red heartbeat. |
+| Nightflight | `moves/bat-nightflight` | one-shot 1.25s | 280×120 | The body unravels into a tapered flock: three bats lead two rippling streams, then bank inward and brake, knitting the runner back together at the landing. |
+| Bat reprisal | `moves/bat-reprisal` | one-shot 1.2s | 244×152 | Scattered bats hook over the attack and dive back: a hand reforms first, silver claws strike in a brief freeze, and the rest of the body folds in behind it. |
 | Dash strike | `moves/dash-strike` | one-shot 2.3s | 372×156 | A crouch, then he's across the floor in a blur of after-images and already cutting: a critical hit, a beat, and he hops back to where he started. |
 | Earth stomp | `moves/earth-stomp` | one-shot 3.46s | 290×142 | A knee comes up, the boot slams down, the floor heaves under the target and a stone spike rams up through it. |
 | Fireball throw | `moves/fireball-throw` | one-shot 6.81s | 356×244 | He gathers fire in his hand, leans back and hurls it: the ball flies, the target takes it in a blast and comes out charred. |

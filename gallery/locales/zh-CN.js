@@ -36,6 +36,7 @@ export const palettes = {
 export const backdrops = { dark: "深色", ground: "地面", sky: "天空", light: "浅色", black: "纯黑", none: "透明" };
 
 export const tags = {
+  "bat-form": "蝠化", swarm: "群集", dodge: "闪避", reprisal: "反击", transform: "化形",
   hurricane: "飓风",
   abduct: "牵引捕获", achievement: "成就", acid: "酸液", actor: "角色", alert: "警示", ambient: "环境",
   angel: "天使", anger: "愤怒", animal: "动物", anime: "动漫", aoe: "范围效果", appear: "出现",

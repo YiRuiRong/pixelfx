@@ -4,7 +4,7 @@
 
 # pixelfx.
 
-**<!-- count -->245<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
+**<!-- count -->248<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
 explosions, magic, weather, UI, pickups, critters and more. Play them live, recolor and mirror them, drop them into
 a browser game, or export sprite sheets for any engine. Plus a Claude Code skill that makes new ones the way a
 picky pixel artist would: draft, render, look, refine.
@@ -21,6 +21,8 @@ palette, and start a browser game from it.
 
 本地特效库已支持简体中文，首次打开默认使用中文，右上角可切换 English。支持中英文搜索；用 `node tools/serve.mjs` 启动后访问 `http://localhost:8080/gallery/`。详见[中文补丁说明](docs/LOCALIZATION.zh-CN.md)。
 
+蝠化招式：[惊蝠脱身、掠夜、回噬](docs/BAT-MOVES.zh-CN.md)。在「完整招式」中搜索「蝠化」查看身体散开、蝠群位移和重聚反击；掠夜另提供可持续播放的飞行循环。
+
 漫画风试作：[漫画飓风](docs/COMIC-HURRICANE.zh-CN.md)，在“自然”分类中预览；使用深色描边、青白风带、硬边明暗与网点，支持透明图集导出。
 
 The method is [Hugo Duprez](https://x.com/HugoDuprez)'s, from [How to make (good) pixel art effects with
@@ -34,7 +36,7 @@ the idea at library scale, with a skill to keep going.
 <!-- catalog -->
 | category | effects | some of them |
 |---|---|---|
-| **moves** | 12 | arrow shot, dash strike, earth stomp, fireball throw, ground pound, holy smite… |
+| **moves** | 15 | arrow shot, startled bat escape, nightflight, bat reprisal, dash strike, earth stomp… |
 | **fire** | 12 | brazier, campfire, candle, fire breath, fire ring, fire tornado… |
 | **explosions** | 12 | barrel explosion, big explosion, cartoon pow, dirt explosion, firework burst, firework rocket… |
 | **water** | 12 | bubbles, drip, fountain, geyser, rain splash, ripples… |

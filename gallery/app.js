@@ -40,6 +40,7 @@ class Player {
     this.W = Math.ceil(Math.max(w * (acted ? Math.min(pad, 1.1) : pad), h * (acted ? Math.min(pad, 1.1) : pad) * aspect));
     this.H = Math.ceil(this.W / aspect);
     this.x = Math.floor((this.W - w) / 2) + ox;
+    if (this.flip) this.x = this.W - this.x;
     // an act stands near the bottom of its tile, with the room above it
     this.y = acted ? Math.max(oy + 2, this.H - b.y1 - 2) : Math.floor((this.H - h) / 2) + oy;
     this.canvas.width = this.W;
@@ -259,6 +260,7 @@ function code(fx) {
     y: Math.floor((h - (b.y1 - b.y0)) / 2) - b.y0,
     ...(detail.opts.palette ? { palette: "[…]" } : {}), ...(detail.flip ? { flip: true } : {}),
   };
+  if (detail.flip) opts.x = w - opts.x;
   $("#d-code").textContent = [
     `import { createFrame, ${make}, composite } from "pixelfx";`,
     `import * as ${v} from "pixelfx/fx/${fx.id}";`,
@@ -279,7 +281,7 @@ function sheet() {
   const cols = Math.min(n, Math.max(1, Math.ceil(Math.sqrt((n * h) / w)))), rows = Math.ceil(n / cols);
   const cv = el("canvas", { width: cols * w, height: rows * h }), ctx = cv.getContext("2d");
   const frame = createFrame(w, h), img = ctx.createImageData(w, h);
-  const inst = createFx(fx.mod, { x: m.origin[0], y: m.origin[1], ...detail.opts, flip: detail.flip });
+  const inst = createFx(fx.mod, { x: detail.flip ? w - m.origin[0] : m.origin[0], y: m.origin[1], ...detail.opts, flip: detail.flip });
   for (let i = 0; i < n; i++) {
     if (i) inst.update(1 / m.fps);
     inst.draw(clearFrame(frame));
@@ -304,7 +306,7 @@ function wireDetail() {
   $("#d-flip").addEventListener("click", (e) => {
     detail.flip = !detail.flip;
     e.target.setAttribute("aria-pressed", String(detail.flip));
-    detail.restart();
+    detail.layout(detail.aspect, detail.pad);
     code(detail.fx);
   });
   $("#d-actor").addEventListener("click", (e) => {
