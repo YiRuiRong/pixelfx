@@ -4,7 +4,7 @@ import { readdirSync, existsSync, statSync, writeFileSync, mkdirSync } from "nod
 import { join, dirname, relative, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
-import { createFrame, clearFrame, createFx, createAct, actBounds, actTiming, composite, painterFor, drawActor, stockActor, backdrop, actorAlphaOf } from "../../src/core/index.js";
+import { createFrame, clearFrame, createFx, createAct, actBounds, actTiming, composite, painterFor, drawActor, stockActor, backdrop, actorAlphaOf, sampleFrameCount } from "../../src/core/index.js";
 import { rasterText, textWidth } from "../../src/core/font.js";
 import { encodePNG } from "./png.mjs";
 
@@ -54,7 +54,7 @@ export function renderFrames(fx, opts = {}) {
   const { meta } = fx, [W, H] = meta.size, [ox, OY] = meta.origin, m = opts.margin ?? 0;
   const OX = opts.options?.flip ? W - ox : ox;
   const w = W + m * 2, h = H + m * 2, fps = opts.fps ?? meta.fps;
-  const n = Math.max(1, Math.round(meta.duration * fps) + (meta.loop ? 0 : 1));
+  const n = sampleFrameCount(meta, fps);
   const shown = createFrame(w, h, -m, -m), bare = createFrame(w, h, -m, -m);
   const bgKind = opts.bg ?? meta.bg;
   const bg = bgKind === "none" ? null : backdrop(bgKind, w, h, OY + m);
@@ -221,25 +221,38 @@ export function contactSheet(fx, r, { max = 16, width = 1600, title, zoom } = {}
 
 /** A sprite sheet (transparent frames in a grid) plus Aseprite-style JSON that most engines import. */
 export function spriteSheet(fx, r, name) {
+  const m = fx.meta;
   const { w, h, frames, fps } = r, n = frames.length;
   const cols = Math.min(n, Math.max(1, Math.ceil(Math.sqrt((n * h) / w)))), rows = Math.ceil(n / cols);
   const img = canvas(cols * w, rows * h, [0, 0, 0, 0]);
   const json = { frames: [], meta: {} };
+  const msAt = i => Math.round(1000 * Math.min(i / fps, m.duration));
   frames.forEach((f, i) => {
     const x = (i % cols) * w, y = Math.floor(i / cols) * h;
-    img.paste(f.clear, w, h, x, y);
+    // Atlas cells never overlap. Copy straight RGBA; alpha-blending onto clear
+    // black here would premultiply wet ink twice when the engine displays it.
+    for (let row = 0; row < h; row++)
+      img.data.set(f.clear.subarray(row*w*4, (row+1)*w*4), ((y+row)*img.w+x)*4);
     json.frames.push({
       filename: `${name} ${i}`, frame: { x, y, w, h }, rotated: false, trimmed: false,
-      spriteSourceSize: { x: 0, y: 0, w, h }, sourceSize: { w, h }, duration: Math.round(1000 / fps),
+      spriteSourceSize: { x: 0, y: 0, w, h }, sourceSize: { w, h },
+      duration: m.frameCount == null ? Math.round(1000 / fps) : msAt(i + 1) - msAt(i),
     });
   });
-  const m = fx.meta;
   json.meta = {
     app: "https://github.com/patch-gg/pixelfx", version: "1", image: `${name}.png`, format: "RGBA8888",
     size: { w: cols * w, h: rows * h }, scale: "1",
     frameTags: [{ name: name, from: 0, to: n - 1, direction: "forward" }],
     pixelfx: { id: fx.id, name: m.name, fps, loop: m.loop, frames: n, frameSize: [w, h], pivot: r.pivot ?? m.origin, columns: cols, ...(fx.mod.act ? { act: actTiming(fx.mod) } : {}) },
   };
+  if (m.cueFrames) {
+    const cues = { frameBase: 0 };
+    for (const [key, nativeFrame] of Object.entries(m.cueFrames)) {
+      const time = nativeFrame / m.fps;
+      cues[key] = { frame: Math.min(n - 1, Math.ceil(nativeFrame * fps / m.fps)), time };
+    }
+    json.meta.pixelfx.cues = cues;
+  }
   return { png: img.png(), json };
 }
 

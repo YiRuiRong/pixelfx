@@ -36,7 +36,9 @@ export const palettes = {
 export const backdrops = { dark: "深色", ground: "地面", sky: "天空", light: "浅色", black: "纯黑", none: "透明" };
 
 export const tags = {
-  mirror: "镜面", reflection: "倒影", delay: "延迟",
+  "ink-studies": "独立水墨", "negative-space": "留白", horse: "马", echo: "回声", "sound-wave": "声波", droplets: "墨滴",
+  "ink-wash": "水墨", "flying-white": "飞白", "blade-master": "剑圣", "stone-monkey": "灵兽石猴", staff: "长棍",
+  mirror: "镜面", reflection: "倒影", delay: "延迟", scar: "旧痕",
   noir: "暗黑漫画", paper: "纸页", tear: "撕裂", stitch: "缝合", thread: "丝线", nail: "钉刺", bind: "束缚", cloth: "布料",
   "bat-form": "蝠化", swarm: "群集", dodge: "闪避", reprisal: "反击", transform: "化形",
   piston: "活塞", industrial: "工业时代",
@@ -96,7 +98,7 @@ export const tags = {
   pixels: "像素", plant: "植物", plasma: "等离子", plus: "加号", poison: "毒素", polearm: "长柄武器",
   pond: "池塘", poof: "烟团", pop: "轻爆", portal: "传送门", potion: "药水", pow: "爆击",
   power: "力量", "power-up": "强化", projectile: "投射物", projector: "投影器", prop: "道具", puddle: "水洼",
-  pulse: "脉冲", punch: "拳击", quake: "地震", quest: "任务", radiant: "光辉", rage: "狂怒",
+  pulse: "脉冲", punch: "拳击", quake: "地震", quest: "任务", radial: "辐射", radiant: "光辉", rage: "狂怒",
   rain: "雨", ranged: "远程", rapier: "刺剑", rarity: "稀有度", ray: "光线", rays: "光线群",
   reactor: "反应堆", reap: "收割", relic: "遗物", reptile: "爬行动物", respawn: "重生", rest: "静止",
   restore: "恢复", resurrect: "复活", retro: "复古", revive: "复苏", reward: "奖励", rgb: "RGB 分色",

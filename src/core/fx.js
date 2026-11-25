@@ -28,6 +28,12 @@ export function painterFor(frame) {
 
 const FADE = 0.3;
 
+/** Fixed-cel animations hold their last cel for one tick. Other one-shots sample the endpoint too. */
+export function sampleFrameCount(meta, fps = meta.fps) {
+  if (meta.frameCount != null) return Math.max(1, Math.ceil(meta.frameCount * fps / meta.fps));
+  return Math.max(1, Math.round(meta.duration * fps) + (meta.loop ? 0 : 1));
+}
+
 const isRamp = (v) => Array.isArray(v) && v.length > 0 && v.every((c) => typeof c === "number" || /^#[0-9a-f]{3,8}$/i.test(c));
 
 /**

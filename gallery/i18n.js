@@ -14,6 +14,7 @@ export function setLanguage(value) {
 
 const messages = {
   "zh-CN": {
+    outcome: "模拟结果", damage: "实际扣血", shield: "护盾全吸收", miss: "挥空",
     title: "pixelfx · 像素特效库",
     description: "由代码驱动的像素特效与动画，支持实时预览、配色调整和精灵图集导出。",
     subtitle: "共 {count} 种像素特效，每一种都由代码驱动。",
@@ -23,6 +24,7 @@ const messages = {
     close: "关闭", playback: "播放", pause: "暂停", play: "播放", again: "重播",
     backdrop: "背景", palette: "配色", seed: "随机变化", show: "显示", mirror: "镜像",
     character: "角色", spriteSheet: "生成图集", useIt: "使用示例", source: "查看源码",
+    sustainLoop: "持续循环段", previewSize: "预览分辨率", downloadGodot: "下载 Godot 资源包",
     copy: "复制", copied: "已复制", selected: "已选中，请复制", all: "全部",
     loop: "循环", once: "单次播放", seconds: "{value} 秒", kind: "类型", length: "时长",
     acted: "角色动作", canvas: "画布", tags: "标签", ownPalette: "原始配色",
@@ -36,6 +38,7 @@ const messages = {
     timingComment: "使用自己的角色时，读取动作时序：{name}.act（姿态、命中与停顿）",
   },
   en: {
+    outcome: "preview result", damage: "HP loss", shield: "shield absorbs", miss: "miss",
     title: "pixelfx", description: "Pixel art effects and animations, every one a small piece of code. Play them, recolor them, export sprite sheets.",
     subtitle: "{count} pixel art effects, every one a small piece of code.",
     github: "github", skill: "claude code skill", language: "Language",
@@ -44,6 +47,7 @@ const messages = {
     close: "close", playback: "play", pause: "pause", play: "play", again: "again",
     backdrop: "backdrop", palette: "palette", seed: "new seed", show: "show", mirror: "mirror",
     character: "character", spriteSheet: "sprite sheet", useIt: "use it", source: "source",
+    sustainLoop: "sustain loop", previewSize: "preview size", downloadGodot: "Download Godot package",
     copy: "copy", copied: "copied", selected: "selected", all: "all",
     loop: "loop", once: "one-shot", seconds: "{value}s", kind: "kind", length: "length",
     acted: "acted", canvas: "canvas", tags: "tags", ownPalette: "its own",

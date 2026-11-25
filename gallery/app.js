@@ -1,14 +1,19 @@
-// The gallery: every effect playing live from its own code. Tiles start when they scroll into view; a click
-// opens one effect with its options, a sprite sheet and the code to use it.
+// Tiles play when visible. Details show the live renderer or the native engine preview and package.
 
-import { effects, categories } from "../src/fx/index.js";
-import { createFrame, clearFrame, createFx, createAct, actBounds, composite, backdrop, drawActor, painterFor, stockActor, actorAlphaOf, PAL, BACKDROPS } from "../src/core/index.js";
+import { effects, categories, packagedEffects } from "../src/fx/index.js";
+import { createFrame, clearFrame, createFx, createAct, actBounds, composite, backdrop, drawActor, painterFor, stockActor, actorAlphaOf, sampleFrameCount, PAL, BACKDROPS } from "../src/core/index.js";
 import { t, getLanguage, setLanguage, effectText, categoryText, tagText, paletteText, backdropText, searchText } from "./i18n.js";
 
 const REPO = "https://github.com/patch-gg/pixelfx";
-const FX = Object.entries(effects).map(([id, mod]) => {
+const bundledSources = import.meta.bundledEffectSources ?? {};
+const embeddedMedia = import.meta.bundledPackageMedia ?? {};
+const assetUrl = (path) => embeddedMedia[path] ?? new URL((import.meta.packageRoot ?? "../outputs/") + path, import.meta.url).href;
+const FX = Object.entries({ ...effects, ...packagedEffects }).sort(([a], [b]) => a.localeCompare(b)).map(([id, mod]) => {
   const meta = { fps: 30, bg: "dark", loop: false, duration: 1, tags: [], options: {}, ...mod.meta };
-  const fx = { id, cat: id.split("/")[0], name: meta.name, mod: { ...mod, meta }, meta };
+  const sourceUrl = bundledSources[id]
+    ? URL.createObjectURL(new Blob([bundledSources[id]], { type: "text/plain;charset=utf-8" }))
+    : mod.sourceUrl ?? `${REPO}/blob/main/src/fx/${id}.js`;
+  const fx = { id, cat: id.split("/")[0], name: meta.name, mod: { ...mod, meta }, meta, sourceUrl, media: mod.media };
   fx.search = searchText(fx, categories.find((c) => c.id === fx.cat));
   return fx;
 });
@@ -111,6 +116,18 @@ class Player {
 // ---- tiles
 const tiles = [];
 const sections = [];
+function syncVideoTile(tile) {
+  const { media } = tile.fx;
+  if (!media) return;
+  const video = tile.cv;
+  if (!tile.visible || tile.fig.hidden || detail || (reduced && !tile.hover)) {
+    video.pause();
+    return;
+  }
+  if (!video.hasAttribute("src")) video.src = assetUrl(media.preview);
+  // Browsers that restrict autoplay still show the poster and offer controls in the detail view.
+  video.play().catch(() => {});
+}
 function build() {
   $("#subtitle").textContent = t("subtitle", { count: FX.length });
   const main = $("#grid");
@@ -122,7 +139,10 @@ function build() {
     const sec = el("section", { id: c.id }, [el("div", { className: "section-head" }, [el("h2", { textContent: translated.name }), el("p", { textContent: translated.blurb })]), grid]);
     sections.push({ c, sec, list });
     for (const fx of list) {
-      const cv = el("canvas", { ariaLabel: effectText(fx).name });
+      const cv = fx.media
+        ? el("video", { poster: assetUrl(fx.media.poster), muted: true, loop: true, playsInline: true, preload: "none" })
+        : el("canvas");
+      cv.ariaLabel = effectText(fx).name;
       const b = fx.mod.act ? actBounds(fx.mod) : null, [fw, fh] = b ? [b.x1 - b.x0, b.y1 - b.y0] : fx.meta.size;
       const fig = el("figure", { className: isScreen(fx) ? "tile big screen" : fw > 200 || fh > 170 || (b && (fw > 130 || fx.mod.act.target || fx.mod.act.targets)) ? "tile big" : "tile", tabIndex: 0 }, [
         el("div", { className: "stage" }, cv),
@@ -131,8 +151,8 @@ function build() {
       const tile = { fx, fig, cv, player: null, visible: false, hover: false };
       fig.addEventListener("click", () => openDetail(fx));
       fig.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), openDetail(fx)));
-      fig.addEventListener("pointerenter", () => (tile.hover = true));
-      fig.addEventListener("pointerleave", () => (tile.hover = false));
+      fig.addEventListener("pointerenter", () => { tile.hover = true; syncVideoTile(tile); });
+      fig.addEventListener("pointerleave", () => { tile.hover = false; syncVideoTile(tile); });
       grid.append(fig);
       tiles.push(tile);
     }
@@ -142,7 +162,8 @@ function build() {
     for (const e of entries) {
       const t = tiles.find((x) => x.fig === e.target);
       t.visible = e.isIntersecting;
-      if (t.visible && !t.player) {
+      if (t.fx.media) syncVideoTile(t);
+      else if (t.visible && !t.player) {
         t.player = isScreen(t.fx) ? new Player(t.cv, t.fx, 16 / 9, 1) : new Player(t.cv, t.fx, 6 / 5, 1.25);
         if (reduced) t.player.seek(t.fx.meta.duration * 0.4);
       }
@@ -152,7 +173,8 @@ function build() {
 }
 
 // ---- filters
-const state = { cat: "all", q: "" };
+const state = { cat: "all", q: new URLSearchParams(location.search).get("q") ?? "" };
+$("#q").value = state.q;
 function chips() {
   const box = $("#chips");
   const mk = (id, label, n) => {
@@ -194,20 +216,32 @@ function openDetail(fx) {
   const d = $("#detail");
   const big = $("#big"), screen = isScreen(fx);
   big.parentElement.classList.toggle("screen", screen);
-  detail = screen ? new Player(big, fx, 16 / 9, 1) : new Player(big, fx, 16 / 10, 1.6);
-  const m = fx.meta;
+  big.hidden = !!fx.media;
+  const video = $("#d-video"), download = $("#d-package");
+  video.hidden = !fx.media;
+  download.hidden = !fx.media;
+  $("#d-live").hidden = !!fx.media;
   $("#d-id").textContent = fx.id;
-  // controls
-  $("#d-bg").replaceChildren(...BACKDROPS.concat("none").map((b) => btn(backdropText(b), () => detail.setBg(b), b === m.bg, "bg")));
-  $("#d-speed").replaceChildren(...[0.25, 0.5, 1].map((s) => btn(`${s}×`, () => (detail.speed = s), s === 1, "speed")));
-  $("#d-pal").replaceChildren();
-  $("#d-actor").hidden = !m.actor;
-  $("#d-actor").setAttribute("aria-pressed", "true");
-  $("#d-flip").setAttribute("aria-pressed", "false");
-  $("#d-play").setAttribute("aria-pressed", "true");
   $("#d-sheet").replaceChildren();
+  if (fx.media) {
+    detail = { fx };
+    video.poster = assetUrl(fx.media.poster);
+    video.src = assetUrl(fx.media.preview);
+    download.href = assetUrl(fx.media.archive);
+    download.download = fx.media.archive.split("/").pop();
+    if (!reduced) video.play().catch(() => {});
+  } else {
+    detail = screen ? new Player(big, fx, 16 / 9, 1) : new Player(big, fx, 16 / 10, 1.6);
+    $("#d-bg").replaceChildren(...BACKDROPS.concat("none").map((b) => btn(backdropText(b), () => detail.setBg(b), b === fx.meta.bg, "bg")));
+    $("#d-speed").replaceChildren(...[0.25, 0.5, 1].map((s) => btn(`${s}×`, () => (detail.speed = s), s === 1, "speed")));
+    $("#d-pal").replaceChildren();
+    $("#d-actor").hidden = !fx.meta.actor;
+    $("#d-actor").setAttribute("aria-pressed", "true");
+    $("#d-flip").setAttribute("aria-pressed", "false");
+    $("#d-play").setAttribute("aria-pressed", "true");
+  }
+  tiles.forEach(syncVideoTile);
   refreshDetailText();
-  code(fx);
   d.showModal();
   d.scrollTop = 0;
 }
@@ -215,21 +249,31 @@ function refreshDetailText() {
   const fx = detail.fx, m = fx.meta, translated = effectText(fx);
   $("#d-name").textContent = translated.name;
   $("#d-desc").textContent = translated.desc;
-  $("#big").ariaLabel = translated.name;
-  const frames = Math.round(m.duration * m.fps) + (m.loop ? 0 : 1);
+  $(fx.media ? "#d-video" : "#big").ariaLabel = translated.name;
+  const frames = sampleFrameCount(m);
   const facts = [
     [t("kind"), m.loop ? t("loop") : t("once")],
-    [t("length"), t("lengthValue", { seconds: +m.duration.toFixed(2), frames, fps: m.fps })],
+    [t(fx.media && m.loop ? "sustainLoop" : "length"), t("lengthValue", { seconds: +m.duration.toFixed(2), frames, fps: m.fps })],
     ...(fx.mod.act ? [[t("acted"), actFacts(fx.mod)]] : []),
-    [t("canvas"), t("canvasValue", { w: m.size[0], h: m.size[1] })],
+    [t(fx.media ? "previewSize" : "canvas"), t("canvasValue", { w: m.size[0], h: m.size[1] })],
     [t("tags"), m.tags.map(tagText).join(t("tagSeparator"))],
   ];
   $("#d-facts").replaceChildren(...facts.flatMap(([k, v]) => [el("dt", { textContent: k }), el("dd", { textContent: v })]));
+  if (fx.media) return;
+  // Optional outcome controls belong to the preview, not the battle simulation.
+  $("#d-outcome-row").hidden = !m.outcomes;
+  $("#d-outcome").replaceChildren(...(m.outcomes ?? []).map(key => btn(t(key), () => {
+    detail.opts.outcome = key;
+    detail.restart();
+    $("#d-sheet").replaceChildren();
+    code(fx);
+  }, key === (detail.opts.outcome ?? m.options.outcome), "outcome")));
   [...$("#d-bg").children].forEach((button, i) => { button.textContent = backdropText([...BACKDROPS, "none"][i]); });
   const pal = $("#d-pal"), selected = pal.value;
   pal.replaceChildren(el("option", { value: "", textContent: t("ownPalette") }), ...Object.keys(PAL).map((k) => el("option", { value: k, textContent: paletteText(k) })));
   pal.value = selected;
   $("#d-play").textContent = t(detail.playing ? "pause" : "play");
+  code(fx);
 }
 // what the body does around the effect, in a line: the wind-up, the freeze, the recovery
 function actFacts(mod) {
@@ -258,6 +302,7 @@ function code(fx) {
   const opts = {
     x: Math.floor((w - (b.x1 - b.x0)) / 2) - b.x0,
     y: Math.floor((h - (b.y1 - b.y0)) / 2) - b.y0,
+    ...(detail.opts.outcome ? { outcome: detail.opts.outcome } : {}),
     ...(detail.opts.palette ? { palette: "[…]" } : {}), ...(detail.flip ? { flip: true } : {}),
   };
   if (detail.flip) opts.x = w - opts.x;
@@ -274,10 +319,10 @@ function code(fx) {
     `composite(frame, imageData.data, null);`,
     ...(acted ? [``, `// ${t("timingComment", { name: v })}`] : []),
   ].join("\n");
-  $("#d-src").href = `${REPO}/blob/main/src/fx/${fx.id}.js`;
+  $("#d-src").href = fx.sourceUrl;
 }
 function sheet() {
-  const fx = detail.fx, m = fx.meta, [w, h] = m.size, n = Math.max(1, Math.round(m.duration * m.fps) + (m.loop ? 0 : 1));
+  const fx = detail.fx, m = fx.meta, [w, h] = m.size, n = sampleFrameCount(m);
   const cols = Math.min(n, Math.max(1, Math.ceil(Math.sqrt((n * h) / w)))), rows = Math.ceil(n / cols);
   const cv = el("canvas", { width: cols * w, height: rows * h }), ctx = cv.getContext("2d");
   const frame = createFrame(w, h), img = ctx.createImageData(w, h);
@@ -290,12 +335,16 @@ function sheet() {
   }
   const k = Math.max(1, Math.min(4, Math.floor(1100 / (cols * w))));
   const pic = el("img", { src: cv.toDataURL("image/png"), alt: t("sheetAlt", { name: effectText(fx).name }), width: cols * w * k, height: rows * h * k });
-  $("#d-sheet").replaceChildren(pic, el("p", { textContent: t("sheetInfo", { n, w, h, cols, fps: m.fps, mode: t(m.loop ? "loop" : "once"), command: `node tools/render.mjs ${fx.id} --sheet` }) }));
+  $("#d-sheet").replaceChildren(pic, el("p", { textContent: t("sheetInfo", { n, w, h, cols, fps: m.fps, mode: t(m.loop ? "loop" : "once"), command: `node tools/render.mjs ${fx.id} --sheet${detail.opts.outcome ? ` --opts '${JSON.stringify({outcome:detail.opts.outcome})}'` : ""}` }) }));
 }
 function wireDetail() {
   const d = $("#detail");
   $("#d-close").addEventListener("click", () => d.close());
-  d.addEventListener("close", () => (detail = null));
+  d.addEventListener("close", () => {
+    $("#d-video").pause();
+    detail = null;
+    tiles.forEach(syncVideoTile);
+  });
   d.addEventListener("click", (e) => e.target === d && d.close());
   $("#d-play").addEventListener("click", (e) => {
     detail.playing = !detail.playing;
@@ -369,7 +418,6 @@ function applyLanguage() {
   }
   if (detail) {
     refreshDetailText();
-    code(detail.fx);
     if ($("#d-sheet img")) sheet();
   }
 }
@@ -379,7 +427,7 @@ let last = performance.now();
 function frameLoop(now) {
   const dt = Math.min(0.1, (now - last) / 1000);
   last = now;
-  if (detail) detail.tick(dt);
+  if (detail) detail.tick?.(dt);
   else for (const t of tiles) if (t.visible && t.player && !t.fig.hidden && (!reduced || t.hover)) t.player.tick(dt);
   requestAnimationFrame(frameLoop);
 }

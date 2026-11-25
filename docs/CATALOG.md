@@ -1,7 +1,7 @@
 # Catalog
 
-256 effects in 21 categories. Every one is a file in
-`src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
+269 effects in 21 categories.
+Render JavaScript effects with `node tools/render.mjs <id> --gif`. Native effects link to their engine packages below.
 
 ## moves
 
@@ -81,6 +81,7 @@ splashes, falls, fountains, waves.
 | Waterfall | `water/waterfall` | loop 2s | 144×136 | A river pours from a notch in a rock outcrop: a white curl, a deep sheet that splits into strands, churning foam, spray, drifting mist and rings on a dark pool. |
 | Wave crash | `water/wave-crash` | one-shot 3.2s | 224×104 | A swell rolls in and steepens, its lip throws forward and curls over a dark barrel, then crashes into a burst of white foam and spray that surges on and fades to lace. |
 | Whirlpool | `water/whirlpool` | loop 3s | 128×84 | Seen from above, dark water winds into a vortex: foam arms spiral in, darkening as they're drawn down into a deep eye with a lit far rim, flecks of foam circling in after them. |
+| White horse breaker | `water/white-horse-breaker` | one-shot 1.48s | 208×116 | A blue-black breaker lifts a horse out of its unpainted spaces. Two forehooves take one half-step; the shoulder falls as surf and a single lock of mane lands a beat late. |
 
 ## ice
 
@@ -114,7 +115,11 @@ strikes, arcs, coils, storms.
 | Plasma ball | `lightning/plasma-ball` | loop 3s | 112×104 | A glass globe on a dark pedestal: wandering plasma tendrils reach from the core to the glass and fan out in bright feet where they touch it, lighting the stand and floor. |
 | Spark arc | `lightning/spark-arc` | loop 2s | 124×120 | A climbing arc between two rods: it strikes white at their narrow foot, climbs on rising heat as it stretches and bows, sputters and snaps at the top, then strikes again. |
 | Storm cloud | `lightning/storm-cloud` | loop 3s | 168×176 | A storm cloud boils overhead, billows lit from inside by flickering discharges, ragged scud under its flat dark base; rain slants down and once a loop a bolt cracks to the floor. |
+| Sword tip conductor | `lightning/sword-tip-conductor` | one-shot 1.08s | 36×100 | Two wine-red currents slip from a black sword's guard into one cold point. The blade goes dark on discharge, then catches the returning stroke on one edge. |
 | Tesla coil | `lightning/tesla-coil` | loop 2.4s | 224×136 | A copper coil under a steel torus throws branching arcs that lash out in volleys and now and then strike the floor in a spray of sparks, lighting the metal and the ground. |
+| Thunder scar: Reprise | `lightning/thunder-scar-reprise` | one-shot 1.75s | 232×264 | A cold bolt splits the ground. The wine-red scar kindles, sending a white edge back up the same path and lifting a graphite lip at each bend. |
+| Thunder scar: Sky Rend | `lightning/thunder-scar-sky-rend` | one-shot 1.75s | 272×280 | A cold white bolt leaves a red seam. Half a second later ink and paper invert around the impact, and a white edge climbs the scar, lifting graphite at each bend. |
+| Thunder under ink | `lightning/thunder-under-ink` | one-shot 1.26s | 200×116 | A falling drop spreads into a ragged pool. A fork of bare ground tears through it and holds for three frames before the two skins recoil, with azurite at their torn tips only. |
 | Thunderclap | `lightning/thunderclap` | one-shot 1.9s | 288×156 | A thunderclap round the caster: a white flash, forked bolts burst out and stab the floor, a heavy shock ring tears across the ground raising dust and grit, sparks streak away. |
 | Zap hit | `lightning/zap-hit` | one-shot 0.9s | 144×112 | A contact zap: an arc snaps in from the left, the hit point overloads into a knot of tiny crackling zigzags, a fern of burn marks glows outward, sparks jink away, ozone puffs. |
 
@@ -147,13 +152,18 @@ slashes, smears, cleaves, combos.
 | Comic wind fist | `melee/comic-wind-fist` | one-shot 2.5s | 448×320 | White wind ribbons knot into a giant fist, coil back, punch into a flat impact star, then unravel into curling gusts and chips. |
 | Dagger flurry | `melee/dagger-flurry` | one-shot 0.95s | 148×104 | A flurry of small quick crescents at every angle in front of the fighter, each with a flick of sparks, finished by one big cut that glints and bursts. |
 | Double slash | `melee/double-slash` | one-shot 0.8s | 164×108 | A down cut, then an up cut that crosses it: the moment the X closes both strokes flash white, the crossing bursts with light and sparks, and a dotted X lingers. |
+| Flying white triptych | `melee/flying-white-triptych` | one-shot 0.6s | 128×96 | A jade-edged rising flick, a dry horizontal wipe with two open channels, then a loaded falling cut. Only a damaging third stroke throws ink from its victim. |
 | Hammer smash | `melee/hammer-smash` | one-shot 2s | 208×112 | A hammer drops in front in a wedge of motion: a white slam with rays, a dome of force, a dent with cracks, rocks thrown up that bounce and settle, and dust. |
 | Heavy cleave | `melee/heavy-cleave` | one-shot 1.9s | 208×116 | A glint over the head, then a thick ember arc accelerates over the top into the floor: a white slam, glowing cracks, dust rolling both ways, grit and rising embers. |
+| Inkstone cleave | `melee/inkstone-cleave` | one-shot 0.8s | 156×112 | The clone rises clean. A dry staff-tip trace drops into a low, wet print that splits into three mountain-like folds. A shield takes the print; a missed landing leaves no splash. |
 | Noir page rend | `melee/noir-page-rend` | one-shot 3.25s | 448×384 | A pale scratch tears space into curled black paper around a wine-red cut; the thick lips snap shut and shed slowly tumbling inked scraps. |
 | Scythe reap | `melee/scythe-reap` | one-shot 2.1s | 184×116 | A slow, huge dark crescent reaps round the front with a pale ghostly edge; it hangs, then tears away from the tail into curling wisps and cold vapour. |
 | Spear sweep | `melee/spear-sweep` | one-shot 1.5s | 216×84 | A wide low sweep at shin height: a long flat crescent swings from behind the legs round the front, and the wind of it kicks a wake of dust and grit along the floor. |
 | Spin slash | `melee/spin-slash` | one-shot 0.8s | 208×104 | The blade whirls once round the waist on a tilted plane, behind the body and back in front; the closed ring flares white, dissolves into a dotted trace and throws sparks. |
 | Steam piston hammer | `melee/steam-piston-hammer` | one-shot 4s | 448×448 | A soot-black industrial hammer ratchets on tarnished brass pistons, slams into broken stone and low coal-smoke steam, then labours upward through lingering vapour. |
+| Sword scar: Etch | `melee/sword-scar-etch` | one-shot 1.33s | 280×280 | A cold edge races uphill, lifts a hard graphite fold over a wine-red slit, then closes heel first into a fine scar. |
+| Sword scar: Reprise | `melee/sword-scar-reprise` | one-shot 1.75s | 280×280 | A rising cut crosses an old descending scar. A wine-red spark spreads from their crossing before the old cut reopens along its original path. |
+| Sword scar: Cascade | `melee/sword-scar-sequence` | one-shot 2.42s | 280×280 | One rising sword stroke cuts through three sleeping scars. Their crossings kindle in order, each releasing a single bright edge on its own bearing. |
 | Sword slash | `melee/sword-slash` | one-shot 0.75s | 136×104 | A tilted crescent whips round in two frames, cools from white to deep blue as it trails off, glints at the tip and throws sparks. |
 | Thrust | `melee/thrust` | one-shot 0.75s | 196×76 | A piercing stab: a bundle of streaks shoots out from the hand to a point, a long four-point star flares at the tip with a pierce ring, sparks and speed lines. |
 | Uppercut | `melee/uppercut` | one-shot 0.85s | 132×128 | A crescent rises from the floor past the face, and at the top a comic impact star bursts: bold outline, hot core, burst lines, twinkles and sparks. |
@@ -166,6 +176,7 @@ hit sparks, shockwaves, landings.
 | effect | id | | size | what it does |
 |---|---|---|---|---|
 | Blunt hit | `impacts/blunt-hit` | one-shot 0.9s | 128×88 | A heavy, soft thud: a white-hot lumpy blob cools to cream in a warm pool of light, inked wedges jab out and snap back, a squashed ring of dust puffs swells and drifts, clods drop. |
+| Body shockwave | `impacts/body-shockwave` | loop 1.6s | viewport | The battlefield snaps into black-and-white manga. Speed lines stream from the caster’s chest to every edge, follow the caster, then clear outward as colour returns. [Godot package](../outputs/body-shockwave/body-shockwave.zip) |
 | Bullet impact | `impacts/bullet-impact` | one-shot 1.4s | 152×100 | A bullet hits a wall on the right: a hot half-star, sparks sprayed back in a cone, a puff of grit, chips that fall and bounce, a pock mark cooling to soot. |
 | Critical hit | `impacts/crit-hit` | one-shot 0.9s | 216×136 | A critical hit: a jagged starburst slams in white and overshoots, a ring breaks into flying arcs, sparks streak off, shards tumble to the floor under a big flare. |
 | Ground slam | `impacts/ground-slam` | one-shot 3.2s | 288×208 | Something lands hard: the floor flashes and cracks, two crescent shock waves race out along it, a dust wave and a tall dust cloud rise, rocks erupt, bounce and settle. |
@@ -227,6 +238,7 @@ portals, runes, missiles, beams.
 | Blink out | `arcane/blink-out` | one-shot 1.6s | 136×96 | The caster crackles with gathering light, flashes white, squeezes into a line of light that collapses and pops away in sparks. |
 | Comic space zipper | `arcane/comic-space-zipper` | one-shot 3.5s | 384×384 | A crooked zipper peels open curled paper edges onto a dark screentone pocket, sucks in orbiting chips, then races shut with a sharp snap. |
 | Delayed reflection | `arcane/delayed-reflection` | one-shot 6.5s | 480×384 | Sunlight cuts a reflected figure before a blade escapes the mirror. The glass breaks into shards of moving sky, melts into rain and leaves reflections in the puddles. |
+| Empty mountain echo | `arcane/empty-mountain-echo` | one-shot 2.36s | 232×76 | Eight hanging ink drops flatten in succession under an unseen bell stroke. After the stillness, the last drop stirs: a softer reply travels back through four drops only. |
 | Magic circle cast | `arcane/magic-circle-cast` | one-shot 3.9s | 200×220 | A circle draws itself on the floor, runes ignite one by one, it flashes, and a column of light fires up and breaks apart into glints. |
 | Mana burst | `arcane/mana-burst` | one-shot 1.8s | 208×150 | Energy rushes into a point and blows out in a white flash and rings, flinging glowing runes that flare and pop into sparks one after another. |
 | Portal | `arcane/portal` | loop 2.4s | 152×116 | An upright rift: fibrous spiral arms wind down into the dark, a lit rim wobbles, motes and streaks are pulled in, the floor glows. |
@@ -259,6 +271,7 @@ curses, voids, tendrils, souls.
 | effect | id | | size | what it does |
 |---|---|---|---|---|
 | Black hole | `shadow/black-hole` | loop 4s | 184×132 | A tilted disk of banded rings turns round a black hole, its far side bent up over the top and under the bottom; debris spirals in, stretches and is swallowed. |
+| Black sword wake | `shadow/black-sword-wake` | loop 2s | 128×40 | A black pommel wake pinches into a heavy ink stroke, sheds two hooked wisps and frays into ash. |
 | Curse | `shadow/curse` | one-shot 3.4s | 112×124 | Wisps gather over the head, a skull stamps down with a flash, its eyes burn as the curse floods the body violet, then it cracks and crumbles. |
 | Dark explosion | `shadow/dark-explosion` | one-shot 3.8s | 280×248 | Motes swirl into a pulsing core, a black star cuts across a violet-white flash, and a black sphere burns at the rim, throws lit shards and smoke, then collapses. |
 | Eclipse | `shadow/eclipse` | loop 4s | 160×144 | A black moon over the sun: a breathing pearl corona with long streamers, a thin white rim, and one diamond bead blazing on its edge. |

@@ -4,7 +4,7 @@
 
 # pixelfx.
 
-**<!-- count -->256<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
+**<!-- count -->269<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
 explosions, magic, weather, UI, pickups, critters and more. Play them live, recolor and mirror them, drop them into
 a browser game, or export sprite sheets for any engine. Plus a Claude Code skill that makes new ones the way a
 picky pixel artist would: draft, render, look, refine.
@@ -35,6 +35,12 @@ palette, and start a browser game from it.
 
 镜面主题：[迟到的倒影](docs/DELAYED-REFLECTION.zh-CN.md)，位于“奥术”分类；镜中阳光先行、现实光刃随后穿镜，碎片里仍有流动的天空，最后化作雨滴与水洼倒影。支持换色、镜像、云速调整和透明图集导出。
 
+角色水墨系列：[飞白三折、落墨开碑](docs/INK-DUO.zh-CN.md)。在「近战」搜索「水墨」，切换实际扣血、击盾和挥空，看剑圣镜影三笔飞白与石猴分身落棍泼墨；两款都能导出无角色的透明分段图集。
+
+独立水墨小品：[白马拍岸、墨池藏雷、空山回钟](docs/INK-STUDIES.zh-CN.md)。画廊中搜索「独立水墨」可一起看；三款均为透明底，不绑定人物。
+
+在本地画廊的「命中」分区搜索「周身震波」，可观看全屏黑白漫画放射的实机演示，打开详情即可下载 Godot 资源包。
+
 The method is [Hugo Duprez](https://x.com/HugoDuprez)'s, from [How to make (good) pixel art effects with
 Claude](https://www.spritefusion.com/blog/how-to-make-good-pixel-art-effects-with-claude): code is clay, trust your
 eyes, feed your references. His [open-source effects](https://www.spritefusion.com/pixel-art-vfx) at Sprite Fusion
@@ -49,17 +55,17 @@ the idea at library scale, with a skill to keep going.
 | **moves** | 15 | arrow shot, startled bat escape, nightflight, bat reprisal, dash strike, earth stomp… |
 | **fire** | 12 | brazier, campfire, candle, fire breath, fire ring, fire tornado… |
 | **explosions** | 12 | barrel explosion, big explosion, cartoon pow, dirt explosion, firework burst, firework rocket… |
-| **water** | 12 | bubbles, drip, fountain, geyser, rain splash, ripples… |
+| **water** | 13 | bubbles, drip, fountain, geyser, rain splash, ripples… |
 | **ice** | 10 | blizzard vortex, freeze, frost breath, frost nova, ice crystal, ice lance… |
-| **lightning** | 12 | ball lightning, chain lightning, charge up, comic spring cloud, electrified, lightning strike… |
+| **lightning** | 16 | ball lightning, chain lightning, charge up, comic spring cloud, electrified, lightning strike… |
 | **sci-fi** | 12 | emp blast, energy core, force field, glitch, hologram, jetpack… |
-| **melee** | 15 | claw swipe, comic wind fist, dagger flurry, double slash, hammer smash, heavy cleave… |
-| **impacts** | 11 | blunt hit, bullet impact, critical hit, ground slam, heavy landing, hit flash… |
+| **melee** | 20 | claw swipe, comic wind fist, dagger flurry, double slash, flying white triptych, hammer smash… |
+| **impacts** | 12 | blunt hit, body shockwave, bullet impact, critical hit, ground slam, heavy landing… |
 | **projectiles** | 13 | arrow, bullet tracer, cannon shot, energy disc, signal flare, homing missile… |
 | **spawn & death** | 10 | coin drop, disintegrate, dissolve burn, egg hatch, poof, respawn beam… |
-| **arcane** | 14 | arcane beam, arcane missiles, arcane orb, blink in, blink out, comic space zipper… |
+| **arcane** | 15 | arcane beam, arcane missiles, arcane orb, blink in, blink out, comic space zipper… |
 | **holy** | 10 | blessing, divine shield, feather burst, halo, heal, healing ring… |
-| **shadow** | 14 | black hole, curse, dark explosion, eclipse, grasping hands, hex sigil… |
+| **shadow** | 15 | black hole, black sword wake, curse, dark explosion, eclipse, grasping hands… |
 | **status** | 13 | bleeding, burning, charmed, confused, cursed, frozen… |
 | **nature** | 14 | acid splash, boulder, comic hurricane, earth spike, healing bloom, leaf storm… |
 | **weather** | 12 | aurora, blizzard, cherry blossoms, clouds, falling leaves, fireflies… |
@@ -69,7 +75,7 @@ the idea at library scale, with a skill to keep going.
 | **critters** | 12 | bat, bird, butterfly, eyeball, fish school, flying skull… |
 <!-- /catalog -->
 
-Every effect is a file in `src/fx/<category>/<name>.js`. The [catalog](docs/CATALOG.md) lists them all.
+JavaScript effects live in `src/fx/<category>/<name>.js`. The [catalog](docs/CATALOG.md) also lists downloadable Godot effects.
 
 ## use one.
 

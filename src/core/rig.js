@@ -283,6 +283,10 @@ export const WEAPONS = {
     for (let k = -2.6; k <= 2.6; k += 0.4) T(2.2, k, STEEL.goldD);
     blade(T, 2.6, 10, 1.3);
   } },
+  staff: { two: -9, draw(T) {
+    haft(T, -20, 34, STEEL.wood, STEEL.woodD, 1.15);
+    for (const end of [-20, 32]) haft(T, end, end + 2, STEEL.gold, STEEL.goldD, 1.35);
+  } },
   spear: { two: -12, draw(T) {
     haft(T, -18, 36, STEEL.wood, STEEL.woodD, 0.5);
     blade(T, 36, 11, 2);

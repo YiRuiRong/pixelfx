@@ -1,0 +1,380 @@
+[gd_resource type="SpriteFrames" load_steps=63 format=3]
+
+[ext_resource type="Texture2D" path="body-shockwave.png" id="1_rays"]
+
+[sub_resource type="AtlasTexture" id="Rays_00"]
+atlas = ExtResource("1_rays")
+region = Rect2(0, 0, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_01"]
+atlas = ExtResource("1_rays")
+region = Rect2(512, 0, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_02"]
+atlas = ExtResource("1_rays")
+region = Rect2(1024, 0, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_03"]
+atlas = ExtResource("1_rays")
+region = Rect2(1536, 0, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_04"]
+atlas = ExtResource("1_rays")
+region = Rect2(2048, 0, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_05"]
+atlas = ExtResource("1_rays")
+region = Rect2(2560, 0, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_06"]
+atlas = ExtResource("1_rays")
+region = Rect2(3072, 0, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_07"]
+atlas = ExtResource("1_rays")
+region = Rect2(3584, 0, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_08"]
+atlas = ExtResource("1_rays")
+region = Rect2(0, 512, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_09"]
+atlas = ExtResource("1_rays")
+region = Rect2(512, 512, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_10"]
+atlas = ExtResource("1_rays")
+region = Rect2(1024, 512, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_11"]
+atlas = ExtResource("1_rays")
+region = Rect2(1536, 512, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_12"]
+atlas = ExtResource("1_rays")
+region = Rect2(2048, 512, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_13"]
+atlas = ExtResource("1_rays")
+region = Rect2(2560, 512, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_14"]
+atlas = ExtResource("1_rays")
+region = Rect2(3072, 512, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_15"]
+atlas = ExtResource("1_rays")
+region = Rect2(3584, 512, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_16"]
+atlas = ExtResource("1_rays")
+region = Rect2(0, 1024, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_17"]
+atlas = ExtResource("1_rays")
+region = Rect2(512, 1024, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_18"]
+atlas = ExtResource("1_rays")
+region = Rect2(1024, 1024, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_19"]
+atlas = ExtResource("1_rays")
+region = Rect2(1536, 1024, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_20"]
+atlas = ExtResource("1_rays")
+region = Rect2(2048, 1024, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_21"]
+atlas = ExtResource("1_rays")
+region = Rect2(2560, 1024, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_22"]
+atlas = ExtResource("1_rays")
+region = Rect2(3072, 1024, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_23"]
+atlas = ExtResource("1_rays")
+region = Rect2(3584, 1024, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_24"]
+atlas = ExtResource("1_rays")
+region = Rect2(0, 1536, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_25"]
+atlas = ExtResource("1_rays")
+region = Rect2(512, 1536, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_26"]
+atlas = ExtResource("1_rays")
+region = Rect2(1024, 1536, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_27"]
+atlas = ExtResource("1_rays")
+region = Rect2(1536, 1536, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_28"]
+atlas = ExtResource("1_rays")
+region = Rect2(2048, 1536, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_29"]
+atlas = ExtResource("1_rays")
+region = Rect2(2560, 1536, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_30"]
+atlas = ExtResource("1_rays")
+region = Rect2(3072, 1536, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_31"]
+atlas = ExtResource("1_rays")
+region = Rect2(3584, 1536, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_32"]
+atlas = ExtResource("1_rays")
+region = Rect2(0, 2048, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_33"]
+atlas = ExtResource("1_rays")
+region = Rect2(512, 2048, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_34"]
+atlas = ExtResource("1_rays")
+region = Rect2(1024, 2048, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_35"]
+atlas = ExtResource("1_rays")
+region = Rect2(1536, 2048, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_36"]
+atlas = ExtResource("1_rays")
+region = Rect2(2048, 2048, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_37"]
+atlas = ExtResource("1_rays")
+region = Rect2(2560, 2048, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_38"]
+atlas = ExtResource("1_rays")
+region = Rect2(3072, 2048, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_39"]
+atlas = ExtResource("1_rays")
+region = Rect2(3584, 2048, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_40"]
+atlas = ExtResource("1_rays")
+region = Rect2(0, 2560, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_41"]
+atlas = ExtResource("1_rays")
+region = Rect2(512, 2560, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_42"]
+atlas = ExtResource("1_rays")
+region = Rect2(1024, 2560, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_43"]
+atlas = ExtResource("1_rays")
+region = Rect2(1536, 2560, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_44"]
+atlas = ExtResource("1_rays")
+region = Rect2(2048, 2560, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_45"]
+atlas = ExtResource("1_rays")
+region = Rect2(2560, 2560, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_46"]
+atlas = ExtResource("1_rays")
+region = Rect2(3072, 2560, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_47"]
+atlas = ExtResource("1_rays")
+region = Rect2(3584, 2560, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_48"]
+atlas = ExtResource("1_rays")
+region = Rect2(0, 3072, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_49"]
+atlas = ExtResource("1_rays")
+region = Rect2(512, 3072, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_50"]
+atlas = ExtResource("1_rays")
+region = Rect2(1024, 3072, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_51"]
+atlas = ExtResource("1_rays")
+region = Rect2(1536, 3072, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_52"]
+atlas = ExtResource("1_rays")
+region = Rect2(2048, 3072, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_53"]
+atlas = ExtResource("1_rays")
+region = Rect2(2560, 3072, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_54"]
+atlas = ExtResource("1_rays")
+region = Rect2(3072, 3072, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_55"]
+atlas = ExtResource("1_rays")
+region = Rect2(3584, 3072, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_56"]
+atlas = ExtResource("1_rays")
+region = Rect2(0, 3584, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_57"]
+atlas = ExtResource("1_rays")
+region = Rect2(512, 3584, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_58"]
+atlas = ExtResource("1_rays")
+region = Rect2(1024, 3584, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_59"]
+atlas = ExtResource("1_rays")
+region = Rect2(1536, 3584, 512, 512)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Rays_60"]
+atlas = ExtResource("1_rays")
+region = Rect2(2048, 3584, 512, 512)
+filter_clip = true
+
+[resource]
+resource_name = "周身震波 · 全屏放射线"
+animations = [
+{"frames": [
+{"duration": 1.0, "texture": SubResource("Rays_00")},
+{"duration": 1.0, "texture": SubResource("Rays_01")},
+{"duration": 1.0, "texture": SubResource("Rays_02")},
+{"duration": 1.0, "texture": SubResource("Rays_03")},
+{"duration": 1.0, "texture": SubResource("Rays_04")},
+{"duration": 1.0, "texture": SubResource("Rays_05")},
+{"duration": 1.0, "texture": SubResource("Rays_06")},
+{"duration": 1.0, "texture": SubResource("Rays_07")},
+{"duration": 1.0, "texture": SubResource("Rays_08")},
+{"duration": 1.0, "texture": SubResource("Rays_09")},
+{"duration": 1.0, "texture": SubResource("Rays_10")},
+{"duration": 1.0, "texture": SubResource("Rays_11")},
+{"duration": 1.0, "texture": SubResource("Rays_12")},
+{"duration": 1.0, "texture": SubResource("Rays_13")},
+{"duration": 1.0, "texture": SubResource("Rays_14")},
+{"duration": 1.0, "texture": SubResource("Rays_15")},
+{"duration": 1.0, "texture": SubResource("Rays_16")},
+{"duration": 1.0, "texture": SubResource("Rays_17")},
+{"duration": 1.0, "texture": SubResource("Rays_18")},
+{"duration": 1.0, "texture": SubResource("Rays_19")},
+{"duration": 1.0, "texture": SubResource("Rays_20")},
+{"duration": 1.0, "texture": SubResource("Rays_21")},
+{"duration": 1.0, "texture": SubResource("Rays_22")},
+{"duration": 1.0, "texture": SubResource("Rays_23")},
+{"duration": 1.0, "texture": SubResource("Rays_24")},
+{"duration": 1.0, "texture": SubResource("Rays_25")},
+{"duration": 1.0, "texture": SubResource("Rays_26")},
+{"duration": 1.0, "texture": SubResource("Rays_27")},
+{"duration": 1.0, "texture": SubResource("Rays_28")},
+{"duration": 1.0, "texture": SubResource("Rays_29")},
+{"duration": 1.0, "texture": SubResource("Rays_30")},
+{"duration": 1.0, "texture": SubResource("Rays_31")},
+{"duration": 1.0, "texture": SubResource("Rays_32")},
+{"duration": 1.0, "texture": SubResource("Rays_33")},
+{"duration": 1.0, "texture": SubResource("Rays_34")},
+{"duration": 1.0, "texture": SubResource("Rays_35")},
+{"duration": 1.0, "texture": SubResource("Rays_36")},
+{"duration": 1.0, "texture": SubResource("Rays_37")},
+{"duration": 1.0, "texture": SubResource("Rays_38")},
+{"duration": 1.0, "texture": SubResource("Rays_39")},
+{"duration": 1.0, "texture": SubResource("Rays_40")},
+{"duration": 1.0, "texture": SubResource("Rays_41")},
+{"duration": 1.0, "texture": SubResource("Rays_42")},
+{"duration": 1.0, "texture": SubResource("Rays_43")},
+{"duration": 1.0, "texture": SubResource("Rays_44")},
+{"duration": 1.0, "texture": SubResource("Rays_45")},
+{"duration": 1.0, "texture": SubResource("Rays_46")},
+{"duration": 1.0, "texture": SubResource("Rays_47")}
+], "loop": true, "name": &"sustain", "speed": 30.0},
+{"frames": [
+{"duration": 1.0, "texture": SubResource("Rays_48")},
+{"duration": 1.0, "texture": SubResource("Rays_49")}
+], "loop": false, "name": &"start", "speed": 30.0},
+{"frames": [
+{"duration": 1.0, "texture": SubResource("Rays_50")},
+{"duration": 1.0, "texture": SubResource("Rays_51")},
+{"duration": 1.0, "texture": SubResource("Rays_52")},
+{"duration": 1.0, "texture": SubResource("Rays_53")},
+{"duration": 1.0, "texture": SubResource("Rays_54")},
+{"duration": 1.0, "texture": SubResource("Rays_55")},
+{"duration": 1.0, "texture": SubResource("Rays_56")},
+{"duration": 1.0, "texture": SubResource("Rays_57")},
+{"duration": 1.0, "texture": SubResource("Rays_58")},
+{"duration": 1.0, "texture": SubResource("Rays_59")},
+{"duration": 1.0, "texture": SubResource("Rays_60")}
+], "loop": false, "name": &"release", "speed": 30.0}
+]

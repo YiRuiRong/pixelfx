@@ -51,6 +51,7 @@ import * as water_water_orb from "./water/water-orb.js";
 import * as water_waterfall from "./water/waterfall.js";
 import * as water_wave_crash from "./water/wave-crash.js";
 import * as water_whirlpool from "./water/whirlpool.js";
+import * as water_white_horse_breaker from "./water/white-horse-breaker.js";
 import * as ice_blizzard_vortex from "./ice/blizzard-vortex.js";
 import * as ice_freeze from "./ice/freeze.js";
 import * as ice_frost_breath from "./ice/frost-breath.js";
@@ -70,7 +71,11 @@ import * as lightning_lightning_strike from "./lightning/lightning-strike.js";
 import * as lightning_plasma_ball from "./lightning/plasma-ball.js";
 import * as lightning_spark_arc from "./lightning/spark-arc.js";
 import * as lightning_storm_cloud from "./lightning/storm-cloud.js";
+import * as lightning_sword_tip_conductor from "./lightning/sword-tip-conductor.js";
 import * as lightning_tesla_coil from "./lightning/tesla-coil.js";
+import * as lightning_thunder_scar_reprise from "./lightning/thunder-scar-reprise.js";
+import * as lightning_thunder_scar_sky_rend from "./lightning/thunder-scar-sky-rend.js";
+import * as lightning_thunder_under_ink from "./lightning/thunder-under-ink.js";
 import * as lightning_thunderclap from "./lightning/thunderclap.js";
 import * as lightning_zap_hit from "./lightning/zap-hit.js";
 import * as scifi_emp_blast from "./scifi/emp-blast.js";
@@ -89,13 +94,18 @@ import * as melee_claw_swipe from "./melee/claw-swipe.js";
 import * as melee_comic_wind_fist from "./melee/comic-wind-fist.js";
 import * as melee_dagger_flurry from "./melee/dagger-flurry.js";
 import * as melee_double_slash from "./melee/double-slash.js";
+import * as melee_flying_white_triptych from "./melee/flying-white-triptych.js";
 import * as melee_hammer_smash from "./melee/hammer-smash.js";
 import * as melee_heavy_cleave from "./melee/heavy-cleave.js";
+import * as melee_inkstone_cleave from "./melee/inkstone-cleave.js";
 import * as melee_noir_page_rend from "./melee/noir-page-rend.js";
 import * as melee_scythe_reap from "./melee/scythe-reap.js";
 import * as melee_spear_sweep from "./melee/spear-sweep.js";
 import * as melee_spin_slash from "./melee/spin-slash.js";
 import * as melee_steam_piston_hammer from "./melee/steam-piston-hammer.js";
+import * as melee_sword_scar_etch from "./melee/sword-scar-etch.js";
+import * as melee_sword_scar_reprise from "./melee/sword-scar-reprise.js";
+import * as melee_sword_scar_sequence from "./melee/sword-scar-sequence.js";
 import * as melee_sword_slash from "./melee/sword-slash.js";
 import * as melee_thrust from "./melee/thrust.js";
 import * as melee_uppercut from "./melee/uppercut.js";
@@ -141,6 +151,7 @@ import * as arcane_blink_in from "./arcane/blink-in.js";
 import * as arcane_blink_out from "./arcane/blink-out.js";
 import * as arcane_comic_space_zipper from "./arcane/comic-space-zipper.js";
 import * as arcane_delayed_reflection from "./arcane/delayed-reflection.js";
+import * as arcane_empty_mountain_echo from "./arcane/empty-mountain-echo.js";
 import * as arcane_magic_circle_cast from "./arcane/magic-circle-cast.js";
 import * as arcane_mana_burst from "./arcane/mana-burst.js";
 import * as arcane_portal from "./arcane/portal.js";
@@ -159,6 +170,7 @@ import * as holy_resurrection from "./holy/resurrection.js";
 import * as holy_smite from "./holy/smite.js";
 import * as holy_sunburst from "./holy/sunburst.js";
 import * as shadow_black_hole from "./shadow/black-hole.js";
+import * as shadow_black_sword_wake from "./shadow/black-sword-wake.js";
 import * as shadow_curse from "./shadow/curse.js";
 import * as shadow_dark_explosion from "./shadow/dark-explosion.js";
 import * as shadow_eclipse from "./shadow/eclipse.js";
@@ -258,6 +270,7 @@ import * as critters_snake from "./critters/snake.js";
 import * as critters_wisp from "./critters/wisp.js";
 
 export { categories } from "./categories.js";
+export { packagedEffects } from "./packaged.js";
 
 export const effects = {
   "moves/arrow-shot": moves_arrow_shot,
@@ -311,6 +324,7 @@ export const effects = {
   "water/waterfall": water_waterfall,
   "water/wave-crash": water_wave_crash,
   "water/whirlpool": water_whirlpool,
+  "water/white-horse-breaker": water_white_horse_breaker,
   "ice/blizzard-vortex": ice_blizzard_vortex,
   "ice/freeze": ice_freeze,
   "ice/frost-breath": ice_frost_breath,
@@ -330,7 +344,11 @@ export const effects = {
   "lightning/plasma-ball": lightning_plasma_ball,
   "lightning/spark-arc": lightning_spark_arc,
   "lightning/storm-cloud": lightning_storm_cloud,
+  "lightning/sword-tip-conductor": lightning_sword_tip_conductor,
   "lightning/tesla-coil": lightning_tesla_coil,
+  "lightning/thunder-scar-reprise": lightning_thunder_scar_reprise,
+  "lightning/thunder-scar-sky-rend": lightning_thunder_scar_sky_rend,
+  "lightning/thunder-under-ink": lightning_thunder_under_ink,
   "lightning/thunderclap": lightning_thunderclap,
   "lightning/zap-hit": lightning_zap_hit,
   "scifi/emp-blast": scifi_emp_blast,
@@ -349,13 +367,18 @@ export const effects = {
   "melee/comic-wind-fist": melee_comic_wind_fist,
   "melee/dagger-flurry": melee_dagger_flurry,
   "melee/double-slash": melee_double_slash,
+  "melee/flying-white-triptych": melee_flying_white_triptych,
   "melee/hammer-smash": melee_hammer_smash,
   "melee/heavy-cleave": melee_heavy_cleave,
+  "melee/inkstone-cleave": melee_inkstone_cleave,
   "melee/noir-page-rend": melee_noir_page_rend,
   "melee/scythe-reap": melee_scythe_reap,
   "melee/spear-sweep": melee_spear_sweep,
   "melee/spin-slash": melee_spin_slash,
   "melee/steam-piston-hammer": melee_steam_piston_hammer,
+  "melee/sword-scar-etch": melee_sword_scar_etch,
+  "melee/sword-scar-reprise": melee_sword_scar_reprise,
+  "melee/sword-scar-sequence": melee_sword_scar_sequence,
   "melee/sword-slash": melee_sword_slash,
   "melee/thrust": melee_thrust,
   "melee/uppercut": melee_uppercut,
@@ -401,6 +424,7 @@ export const effects = {
   "arcane/blink-out": arcane_blink_out,
   "arcane/comic-space-zipper": arcane_comic_space_zipper,
   "arcane/delayed-reflection": arcane_delayed_reflection,
+  "arcane/empty-mountain-echo": arcane_empty_mountain_echo,
   "arcane/magic-circle-cast": arcane_magic_circle_cast,
   "arcane/mana-burst": arcane_mana_burst,
   "arcane/portal": arcane_portal,
@@ -419,6 +443,7 @@ export const effects = {
   "holy/smite": holy_smite,
   "holy/sunburst": holy_sunburst,
   "shadow/black-hole": shadow_black_hole,
+  "shadow/black-sword-wake": shadow_black_sword_wake,
   "shadow/curse": shadow_curse,
   "shadow/dark-explosion": shadow_dark_explosion,
   "shadow/eclipse": shadow_eclipse,

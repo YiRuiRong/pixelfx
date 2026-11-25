@@ -209,8 +209,15 @@ export function createAct(mod, o = {}) {
   const a = mod.act ?? {}, meta = mod.meta ?? {}, D = meta.duration ?? 1, flip = !!o.flip, seed = o.seed ?? meta.options?.seed ?? 1;
   const fx = createFx(mod, o), track = a.poses ?? [[0, { ...STAND }]], span = actSpan(mod);
   const X = o.x ?? 0, Y = o.y ?? 0;
-  const targets = (a.targets ?? (a.target ? [a.target] : [])).map((g, i) => new Target(g.x ?? 66, seed + 4 + i));
-  const hits = (a.hits ?? []).map((h) => ({ ...h })).sort((p, q) => p.t - q.t), dust = (a.dust ?? []).slice();
+  // Only acts with explicit outcome gates change; a whiff has no target reaction or hit stop.
+  const applies = (cue) => !cue.outcomes || cue.outcomes.includes(fx.options.outcome);
+  const targets = (a.targets ?? (a.target ? [a.target] : [])).flatMap((g, i) => {
+    if (!applies(g)) return [];
+    const target = new Target(g.x ?? 66, seed + 4 + i);
+    target.slot = i; // h.at always addresses the authored slot, even if an earlier target was omitted.
+    return [target];
+  });
+  const hits = (a.hits ?? []).filter(applies).map((h) => ({ ...h })).sort((p, q) => p.t - q.t), dust = (a.dust ?? []).slice();
   const R = new Rng(seed + 9), specks = [];
   // after-images take the effect's own color unless the act names one
   const ramp = o.palette ?? meta.options?.palette, ghosts = [], gc = hex(a.ghost ?? ramp?.[Math.floor(ramp.length * 0.7)] ?? "#8fb4ff");
@@ -269,7 +276,7 @@ export function createAct(mod, o = {}) {
           shakeT = shake0 = h.shake;
           amp = h.amp ?? 2;
         }
-        if (h.target !== false) targets.forEach((g, i) => (h.at === undefined || h.at === i) && g.hit(h));
+        if (h.target !== false) targets.forEach((g) => (h.at === undefined || h.at === g.slot) && g.hit(h));
         out.onHit?.(h);
       }
       for (; nd < dust.length && dust[nd].t <= tt; nd++) {
@@ -468,7 +475,7 @@ export function actTiming(mod) {
     recovery: mod.meta?.loop ? 0 : Math.max(0, to - D),
     onBody: !!a.onBody,
     targets: (a.targets ?? (a.target ? [a.target] : [])).map((g) => g.x ?? 66),
-    hits: (a.hits ?? []).map((h) => ({ t: h.t, freeze: h.stop ?? 0, shake: h.shake ?? 0, amp: h.amp ?? 0, push: h.target === false ? 0 : h.push ?? 1.2, skin: h.skin, at: h.at })),
+    hits: (a.hits ?? []).map((h) => ({ t: h.t, freeze: h.stop ?? 0, shake: h.shake ?? 0, amp: h.amp ?? 0, push: h.target === false ? 0 : h.push ?? 1.2, skin: h.skin, at: h.at, ...(h.outcomes ? { outcomes: h.outcomes } : {}) })),
     poses: (a.poses ?? []).map(([t, pose, how]) => ({ t, how: how ?? "smooth", pose })),
   };
 }

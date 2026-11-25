@@ -7,6 +7,7 @@ import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT, FX_DIR, allIds, loadEffect } from "./lib/fxlib.mjs";
 import { categories } from "../src/fx/categories.js";
+import { packagedEffects } from "../src/fx/packaged.js";
 
 const metas = [];
 for (const id of allIds()) {
@@ -17,6 +18,7 @@ for (const id of allIds()) {
   }
 }
 const ids = metas.map((m) => m.id);
+for (const [id, { meta, media }] of Object.entries(packagedEffects)) metas.push({ id, ...meta, media });
 const order = new Map(categories.map((c, i) => [c.id, i]));
 const rank = (id) => order.get(id.split("/")[0]) ?? 99;
 ids.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
@@ -29,6 +31,7 @@ const lines = [
   ...ids.map((id) => `import * as ${ident(id)} from "./${id}.js";`),
   "",
   `export { categories } from "./categories.js";`,
+  `export { packagedEffects } from "./packaged.js";`,
   "",
   "export const effects = {",
   ...ids.map((id) => `  "${id}": ${ident(id)},`),
@@ -40,20 +43,23 @@ writeFileSync(join(FX_DIR, "index.js"), lines.join("\n"));
 const md = [
   "# Catalog",
   "",
-  `${ids.length} effects in ${categories.filter((c) => metas.some((m) => m.id.startsWith(c.id + "/"))).length} categories. Every one is a file in`,
-  "`src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.",
+  `${metas.length} effects in ${categories.filter((c) => metas.some((m) => m.id.startsWith(c.id + "/"))).length} categories.`,
+  "Render JavaScript effects with `node tools/render.mjs <id> --gif`. Native effects link to their engine packages below.",
   "",
 ];
 for (const c of categories) {
   const list = metas.filter((m) => m.id.startsWith(c.id + "/"));
   if (!list.length) continue;
   md.push(`## ${c.name}`, "", `${c.blurb}.`, "", "| effect | id | | size | what it does |", "|---|---|---|---|---|");
-  for (const m of list)
-    md.push(`| ${m.name} | \`${m.id}\` | ${m.loop ? "loop" : "one-shot"} ${+m.duration.toFixed(2)}s | ${m.size[0]}×${m.size[1]} | ${m.desc.replace(/\|/g, "\\|")} |`);
+  for (const m of list) {
+    const size = m.media ? "viewport" : `${m.size[0]}×${m.size[1]}`;
+    const archive = m.media ? ` [Godot package](../outputs/${m.media.archive})` : "";
+    md.push(`| ${m.name} | \`${m.id}\` | ${m.loop ? "loop" : "one-shot"} ${+m.duration.toFixed(2)}s | ${size} | ${m.desc.replace(/\|/g, "\\|")}${archive} |`);
+  }
   md.push("");
 }
 writeFileSync(join(ROOT, "docs", "CATALOG.md"), md.join("\n"));
-console.log(`${ids.length} effects -> src/fx/index.js, docs/CATALOG.md`);
+console.log(`${ids.length} JavaScript effects, ${metas.length} gallery entries -> src/fx/index.js, docs/CATALOG.md`);
 
 // README: the count and the category table
 const readme = join(ROOT, "README.md");
@@ -63,6 +69,6 @@ const rows = categories
   .map(([c, list]) => `| **${c.name}** | ${list.length} | ${list.slice(0, 6).map((m) => m.name.toLowerCase()).join(", ")}${list.length > 6 ? "…" : ""} |`);
 const table = ["| category | effects | some of them |", "|---|---|---|", ...rows].join("\n");
 let text = readFileSync(readme, "utf8");
-text = text.replace(/<!-- count -->[\s\S]*?<!-- \/count -->/, `<!-- count -->${ids.length}<!-- /count -->`);
+text = text.replace(/<!-- count -->[\s\S]*?<!-- \/count -->/, `<!-- count -->${metas.length}<!-- /count -->`);
 text = text.replace(/<!-- catalog -->[\s\S]*?<!-- \/catalog -->/, `<!-- catalog -->\n${table}\n<!-- /catalog -->`);
 writeFileSync(readme, text);
